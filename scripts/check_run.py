@@ -2,10 +2,10 @@
 """Check an MPAS-GOCART2G run directory and summarize its aerosol output.
 
 Pass/fail covers what a software test can decide: the model logged no errors,
-the expected hourly aerosol files exist, every field is finite, and each
-enabled component (dust, sea salt) emitted mass and built a non-negative
-burden. Whether the aerosol amounts are scientifically right is not decided
-here; the printed numbers are for a person to judge.
+the expected hourly aerosol files exist, every field is finite, column masses
+are non-negative, dust and sea salt emitted mass, and every component that
+should hold aerosol does. Whether the aerosol amounts are scientifically right
+is not decided here; the printed numbers are for a person to judge.
 
 Writes check_summary.json into the run directory. Exit status is 0 when all
 checks pass and 1 otherwise.
@@ -24,8 +24,18 @@ import netCDF4
 import numpy as np
 
 SECONDS_PER_YEAR = 365.0 * 86400.0
-COMPONENTS = {"du": "config_gocart2G_do_DU2G", "ss": "config_gocart2G_do_SS2G"}
-LABELS = {"du": "dust", "ss": "sea salt"}
+
+# prefix, namelist switch, label, column-mass variable, optical-depth variable,
+# emitted online by the model, present in a MERRA-2 initial condition
+COMPONENTS = [
+    ("du", "config_gocart2G_do_DU2G", "dust", "duCMASS", "duEXTTAU", True, True),
+    ("ss", "config_gocart2G_do_SS2G", "sea salt", "ssCMASS", "ssEXTTAU", True, True),
+    ("su", "config_gocart2G_do_SU2G", "sulfate", "SO4cmass", "suEXTTAU", False, True),
+    ("ni", "config_gocart2G_do_NI2G", "nitrate", "niCMASS", "niEXTTAU", False, True),
+    ("bc", "config_gocart2G_do_CA2Gbc", "black carbon", "bcCMASS", "bcEXTTAU", False, True),
+    ("oc", "config_gocart2G_do_CA2Goc", "organic carbon", "ocCMASS", "ocEXTTAU", False, True),
+    ("br", "config_gocart2G_do_CA2Gbr", "brown carbon", "brCMASS", "brEXTTAU", False, False),
+]
 
 
 def xtime(nc: netCDF4.Dataset) -> dt.datetime:
@@ -81,7 +91,9 @@ def main() -> int:
         area = mesh["areaCell"][:].astype("f8")
 
     namelist = (run / "namelist.atmosphere").read_text()
-    enabled = [prefix for prefix, flag in COMPONENTS.items() if namelist_flag(namelist, flag)]
+    enabled = [c for c in COMPONENTS if namelist_flag(namelist, c[1])]
+    init_namelist = run / "namelist.init_atmosphere"
+    merra2_start = init_namelist.exists() and namelist_flag(init_namelist.read_text(), "config_gocart2G_interp")
 
     with netCDF4.Dataset(frames[0]) as first, netCDF4.Dataset(frames[-1]) as last:
         start, stop = xtime(first), xtime(last)
@@ -101,7 +113,8 @@ def main() -> int:
             "elapsed_hours": elapsed_h,
             "wall_seconds": float(wall.group(1)) if wall else None,
             "n_cells": int(area.size),
-            "enabled_components": enabled,
+            "enabled_components": [c[2] for c in enabled],
+            "aerosol_initial_condition": "MERRA-2" if merra2_start else "zero",
         }
         if winds:
             u_min, u_max = (float(x) for x in winds[-1])
@@ -115,28 +128,37 @@ def main() -> int:
         if enabled:
             check("total AOD positive somewhere", tau.max() > 0.0, f"max={tau.max():.3e}")
 
-        for prefix in enabled:
-            label = LABELS[prefix]
-            emission = sum(last[f"{prefix}EM_bin{k}"][0].astype("f8") for k in range(1, 6))
-            column = last[f"{prefix}CMASS"][0].astype("f8")
-            rate = float((emission * area).sum())            # kg s-1
+        for prefix, _, label, column_name, tau_name, online, in_merra2 in enabled:
+            if column_name not in last.variables:
+                check(f"{label} output present", False, f"{column_name} is not in the aerosol stream")
+                continue
+            column = last[column_name][0].astype("f8")
             burden = float((column * area).sum())            # kg
-            # Cold-start diagnostic: a column cannot hold much more than its own
-            # emission since the start unless transport supplied it.
-            supply = emission * elapsed_h * 3600.0
-            excess = (column > 1e-5) & (column > 10.0 * supply)
-            summary[label] = {
-                "emission_Tg_per_year_equivalent": rate * SECONDS_PER_YEAR / 1e9,
+            entry: dict[str, object] = {
                 "burden_Tg": burden / 1e9,
-                "burden_over_emission_rate_hours": burden / rate / 3600.0 if rate > 0 else None,
                 "column_mass_max_kg_m2": float(column.max()),
-                "aod550_max": float(last[f"{prefix}EXTTAU"][0, :, 0].max()),
-                "cells_over_10x_local_supply": int(excess.sum()),
-                "burden_share_in_those_cells": float((column[excess] * area[excess]).sum() / burden) if burden > 0 else 0.0,
             }
-            check(f"{label} emission positive", rate > 0.0, f"{rate:.3e} kg/s")
-            check(f"{label} burden positive", burden > 0.0, f"{burden / 1e9:.4f} Tg")
+            if tau_name in last.variables:
+                entry["aod550_max"] = float(last[tau_name][0, :, 0].max())
             check(f"{label} column mass non-negative", column.min() >= 0.0, f"min={column.min():.3e}")
+            if online or (merra2_start and in_merra2):
+                check(f"{label} burden positive", burden > 0.0, f"{burden / 1e9:.4f} Tg")
+
+            if online:
+                emission = sum(last[f"{prefix}EM_bin{k}"][0].astype("f8") for k in range(1, 6))
+                rate = float((emission * area).sum())        # kg s-1
+                entry["emission_Tg_per_year_equivalent"] = rate * SECONDS_PER_YEAR / 1e9
+                check(f"{label} emission positive", rate > 0.0, f"{rate:.3e} kg/s")
+                if not merra2_start:
+                    # Cold-start diagnostic: a column cannot hold much more than its
+                    # own emission since the start unless transport supplied it.
+                    supply = emission * elapsed_h * 3600.0
+                    excess = (column > 1e-5) & (column > 10.0 * supply)
+                    entry["burden_over_emission_rate_hours"] = burden / rate / 3600.0 if rate > 0 else None
+                    entry["cells_over_10x_local_supply"] = int(excess.sum())
+                    entry["burden_share_in_those_cells"] = (
+                        float((column[excess] * area[excess]).sum() / burden) if burden > 0 else 0.0)
+            summary[label] = entry
 
     return report(run, checks, summary)
 
@@ -152,13 +174,20 @@ def report(run: Path, checks: list[tuple[str, bool, str]], summary: dict[str, ob
     if "elapsed_hours" in summary:
         print(f"\n{summary['elapsed_hours']:g} simulated hours, wall {summary.get('wall_seconds')} s")
         print(f"AOD 550 nm: global mean {summary['aod550_global_mean']:.4f}, max {summary['aod550_max']:.3f}")
-        for label in LABELS.values():
-            if label in summary:
-                s = summary[label]
-                print(f"{label}: emission {s['emission_Tg_per_year_equivalent']:.0f} Tg/yr-equivalent, "
-                      f"burden {s['burden_Tg']:.4f} Tg, max column {s['column_mass_max_kg_m2']:.2e} kg/m2, "
-                      f"{s['cells_over_10x_local_supply']} cells over 10x local supply "
-                      f"({100 * s['burden_share_in_those_cells']:.1f}% of burden)")
+        print(f"aerosol initial condition: {summary['aerosol_initial_condition']}")
+        for _, _, label, *_ in COMPONENTS:
+            if label not in summary:
+                continue
+            s = summary[label]
+            line = f"{label}: burden {s['burden_Tg']:.4f} Tg, max column {s['column_mass_max_kg_m2']:.2e} kg/m2"
+            if "aod550_max" in s:
+                line += f", max AOD {s['aod550_max']:.3f}"
+            if "emission_Tg_per_year_equivalent" in s:
+                line += f", emission {s['emission_Tg_per_year_equivalent']:.0f} Tg/yr-equivalent"
+            if "cells_over_10x_local_supply" in s:
+                line += (f", {s['cells_over_10x_local_supply']} cells over 10x local supply "
+                         f"({100 * s['burden_share_in_those_cells']:.1f}% of burden)")
+            print(line)
     print(f"\n{'ALL CHECKS PASSED' if passed else 'CHECKS FAILED'}  ({run / 'check_summary.json'})")
     return 0 if passed else 1
 

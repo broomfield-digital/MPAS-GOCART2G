@@ -73,6 +73,10 @@ scripts/prepare_gfs.sh 2024101500   # GFS analysis -> intermediate file
 scripts/run_case.sh natural_120km   # static + init + 3-hour run + check
 ```
 
+With the Derecho inputs (`scripts/fetch_derecho_inputs.sh core`, which asks
+for an NCAR login), `scripts/run_case.sh merra2_120km` runs every aerosol
+component from a MERRA-2 start.
+
 Every script is idempotent, stops on the first failure, and names the log to
 read. `scripts/run_case.sh --help` lists the stage and length options.
 
@@ -219,10 +223,13 @@ on Derecho to refresh it. What the listing established:
 `test_cases/<case>/` holds `case.env`, namelist and stream templates with
 `@PLACEHOLDER@` tokens, and a README stating what the case does and does not
 exercise. `scripts/run_case.sh` renders them into `$G2G_WORK/runs/<name>/`.
+Each README also records reference results and any unexplained behaviour
+seen in that case; read it before interpreting a run.
 
 | Case | Mesh | Aerosols | Inputs |
 |---|---|---|---|
 | `natural_120km` | `x1.40962`, 55 levels | dust and sea salt, cold start, zero other emissions | public only |
+| `merra2_120km` | `x1.40962`, 55 levels | all eight components from a MERRA-2 start, reference backgrounds and optics, zero inventory emissions | public plus `fetch_derecho_inputs.sh core` |
 
 To add a case, copy a case directory, edit `case.env` and the templates, and
 list it here. Keep the README honest about which inputs are synthetic.
