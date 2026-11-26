@@ -10,6 +10,8 @@
 #   --history-interval I    interval of the full-state history stream [case.env]
 #   --stage S               static | init | atm | check | all         [all]
 #   --fresh                 redo the static and init stages even if their output exists
+#   --free                  run a case that has the AOD constraint with it turned off:
+#                           the free twin of a constrained run
 #
 # Stages:
 #   static  init_atmosphere pass 1: vertical grid plus the GOCART-2G dust
@@ -28,6 +30,12 @@
 #   CASE_EMISSIONS=regridded   link $G2G_WORK/inputs/emis/<mesh>/*.nc; the case's
 #                              stream templates then define the emission streams
 #                              themselves (default: zero, generated per run)
+# and, for cases with the AOD constraint (a namelist template with @AOD_CONSTRAINT@
+# and an aod_obs stream):
+#   CASE_AOD_OBS=files         link the daily observation files from
+#                              $G2G_WORK/inputs/aod_obs/<mesh>/ (or $G2G_AOD_OBS)
+#   CASE_AOD_OBS=synthetic     write synthetic observations for the run with
+#                              scripts/make_synthetic_aod_obs.py $CASE_AOD_OBS_OPTIONS
 #
 # Two init passes are required. The emission flags make init_atmosphere read
 # erod from its input file, so the dust fields must already be in that file;
@@ -57,6 +65,7 @@ ranks="$CASE_RANKS"
 history_interval="$CASE_HISTORY_INTERVAL"
 stage=all
 fresh=false
+free=false
 while [ "$#" -gt 0 ]; do
     case "$1" in
         --name) run_name="$2"; shift 2 ;;
@@ -65,6 +74,7 @@ while [ "$#" -gt 0 ]; do
         --history-interval) history_interval="$2"; shift 2 ;;
         --stage) stage="$2"; shift 2 ;;
         --fresh) fresh=true; shift ;;
+        --free) free=true; shift ;;
         *) g2g_die "unknown option: $1" ;;
     esac
 done
@@ -80,6 +90,10 @@ stop_day="$(date -u -d "$start_day ${cycle:8:2}:00:00 UTC + $hours hours" +%Y-%m
 stop_stamp="$(date -u -d "$start_day ${cycle:8:2}:00:00 UTC + $hours hours" +%Y-%m-%d_%H)"
 emissions="${CASE_EMISSIONS:-zero}"
 case "$emissions" in zero|regridded) ;; *) g2g_die "CASE_EMISSIONS must be zero or regridded" ;; esac
+aod_obs="${CASE_AOD_OBS:-none}"
+case "$aod_obs" in none|files|synthetic) ;; *) g2g_die "CASE_AOD_OBS must be none, files, or synthetic" ;; esac
+aod_constraint=false
+if [ "$aod_obs" != none ] && ! $free; then aod_constraint=true; fi
 run_duration="$(printf '%d_%02d:00:00' $((hours / 24)) $((hours % 24)))"
 
 run="$G2G_RUNS/$run_name"
@@ -91,6 +105,7 @@ chem_src="$G2G_REPO/gocartMPAS/src/core_atmosphere/chemistry"
 derecho="$G2G_INPUTS/derecho"
 optics_dir="$G2G_INPUTS/${CASE_OPTICS_DIR:-optics/raw}"
 emis_dir="$G2G_INPUTS/emis/$mesh"
+aod_obs_dir="${G2G_AOD_OBS:-$G2G_INPUTS/aod_obs/$mesh}"
 
 want() { case "$stage" in all|"$1") return 0 ;; *) return 1 ;; esac; }
 
@@ -113,9 +128,35 @@ check_emission_coverage() {
 
 need_file() { [ -e "$1" ] || g2g_die "missing $1 ($2)"; }
 
+# The AOD constraint interpolates between the 3-hour observation windows on
+# either side of the model time, so it needs a file for every day from three
+# hours before the start to three hours after the stop.
+stage_aod_obs() {
+    local first last days i day f files=()
+    first="$(date -u -d "$start_day ${cycle:8:2}:00:00 UTC - 3 hours" +%Y-%m-%d)"
+    last="$(date -u -d "$start_day ${cycle:8:2}:00:00 UTC + $hours hours + 3 hours" +%Y-%m-%d)"
+    days=$(( ( $(date -u -d "$last" +%s) - $(date -u -d "$first" +%s) ) / 86400 + 1 ))
+    if [ "$aod_obs" = synthetic ]; then
+        # shellcheck disable=SC2086
+        python "$G2G_REPO/scripts/make_synthetic_aod_obs.py" --mesh-file "$mesh.init.nc" \
+            --mesh-name "$mesh" --start "$first" --days "$days" --outdir "$run" ${CASE_AOD_OBS_OPTIONS:-}
+    fi
+    for ((i = 0; i < days; i++)); do
+        day="$(date -u -d "$first + $i day" +%Y%m%d)"
+        f="modis_viirs_aod_3hr.$mesh.$day.nc"
+        if [ "$aod_obs" = files ]; then
+            need_file "$aod_obs_dir/$f" "AOD observations for $day; see the case README"
+            ln -sf "$aod_obs_dir/$f" .
+        fi
+        files+=("$f")
+    done
+    python "$G2G_REPO/scripts/check_aod_obs.py" --mesh-file "$mesh.init.nc" "${files[@]}"
+}
+
 render() {  # render <template> <output> [emission-stream fragment]
     local template="$1" out="$2" fragment="${3:-}"
     sed -e "s|@MESH@|$mesh|g" \
+        -e "s|@AOD_CONSTRAINT@|$aod_constraint|g" \
         -e "s|@START_TIME@|$start_time|g" \
         -e "s|@RUN_DURATION@|$run_duration|g" \
         -e "s|@HISTORY_INTERVAL@|$history_interval|g" \
@@ -228,7 +269,7 @@ if want atm; then
         while IFS= read -r f; do
             need_file "$f" "run scripts/regrid_emissions.sh"
             emission_files+=("$f")
-        done < <(grep -B3 'input_interval="none"' streams.atmosphere | grep -o 'filename_template="[^"]*"' | cut -d'"' -f2 | grep -v sfc_update | sort -u)
+        done < <(grep -B3 'input_interval="none"' streams.atmosphere | grep -o 'filename_template="[^"]*"' | cut -d'"' -f2 | grep -v -e sfc_update -e modis_viirs_aod | sort -u)
         [ "${#emission_files[@]}" -gt 0 ] || g2g_die "$case_dir/streams.atmosphere defines no emission streams"
         check_emission_coverage "${emission_files[@]}"
     else
@@ -236,6 +277,8 @@ if want atm; then
         check_emission_coverage "$mesh.zero.anth_bc_emissions.nc"
         render "$case_dir/streams.atmosphere" streams.atmosphere streams.emissions.atmosphere
     fi
+
+    if $aod_constraint; then stage_aod_obs; fi
 
     ln -sf "$atm_tree/atmosphere_model" .
     ln -sf "$mesh_dir/$mesh.graph.info.part.$ranks" .
@@ -253,12 +296,14 @@ if want atm; then
     cp "$atm_tree"/stream_list.atmosphere.* .
     cp "$case_dir"/stream_list.atmosphere.* .
     render "$case_dir/namelist.atmosphere" namelist.atmosphere
-    rm -f history.*.nc diag.*.nc aerosol.*.nc
+    rm -f history.*.nc diag.*.nc aerosol.*.nc aod_check.nc
     run_model atmosphere "$ranks" atmosphere
     cat > run_info.txt <<EOF
 case=$case_name
 mesh=$mesh
 emissions=$emissions
+aod_constraint=$aod_constraint
+aod_obs=$aod_obs
 start_time=$start_time
 hours=$hours
 ranks=$ranks
@@ -269,4 +314,5 @@ fi
 
 if want check; then
     python "$G2G_REPO/scripts/check_run.py" "$run" --hours "$hours"
+    if $aod_constraint; then python "$G2G_REPO/scripts/check_aod_constraint.py" "$run"; fi
 fi

@@ -13,6 +13,7 @@
  use mpas_timekeeping
  use mpas_stream_manager
 
+ use mpas_chemistry_gocart2G_aod_obs,only: aod_obs_update
  use mpas_chemistry_gocart2G_emissions_init
  use mpas_chemistry_gocart2G_emissions_update
  use mpas_chemistry_gocart2G_update
@@ -28,6 +29,7 @@
  character(len=*),parameter:: gocart2GbiogAlarmID = 'gocart2G_biog'
 ! 20260413_rkumar_start
  character(len=*),parameter:: gocart2Ghno3AlarmID = 'gocart2G_hno3'
+ character(len=*),parameter:: gocart2GaodAlarmID  = 'gocart2G_aod'
 ! 20260413_rkumar_end
 
  integer,public:: iyear
@@ -86,6 +88,8 @@
 ! 20260413_rkumar_end
 
  integer:: ierr
+
+ logical,pointer:: aod_constraint
 
 !------------------------------------------------------------------------------------------------------------------
  call mpas_log_write(' ')
@@ -230,6 +234,15 @@
 
  end do
 
+!--- AOD constraint: when it is due, read the observations around the current time. The constraint itself
+!    is applied at the end of this time step, in gocart2G_chemistry_driver.
+ call mpas_pool_get_config(domain%blocklist%configs,'config_gocart2G_aod_constraint',aod_constraint)
+ if(aod_constraint) then
+    if(mpas_is_alarm_ringing(clock,gocart2GaodAlarmID,ierr=ierr)) then
+       call mpas_reset_clock_alarm(clock,gocart2GaodAlarmID,ierr=ierr)
+       call aod_obs_update(domain,clock,stream_manager)
+    endif
+ endif
 
  call mpas_log_write('--- end subroutine gocart2G_timetracker.')
  call mpas_log_write(' ')
@@ -252,6 +265,9 @@
  character(len=StrKIND),pointer:: anth_interval
  character(len=StrKIND),pointer:: biob_interval
  character(len=StrKIND),pointer:: biog_interval
+ character(len=StrKIND),pointer:: aod_interval
+
+ logical,pointer:: aod_constraint
 
  integer:: ierr
 
@@ -323,6 +339,20 @@
  call mpas_log_write('--- gocart2G_timetracker_init: error creating gocart2GbiogAlarmID', &
                           messageType=MPAS_LOG_CRIT)
 
+
+!--- initializes alarm to apply the AOD constraint:
+ call mpas_pool_get_config(configs,'config_gocart2G_aod_constraint',aod_constraint)
+ if(aod_constraint) then
+    call mpas_pool_get_config(configs,'config_gocart2G_aod_interval',aod_interval)
+    call mpas_log_write('--- config_gocart2G_aod_interval = '//aod_interval)
+    ierr = 0
+    call mpas_set_timeInterval(alarmTimeStep,timeString=aod_interval,ierr=ierr)
+    alarmStartTime = startTime
+    call mpas_add_clock_alarm(clock,gocart2GaodAlarmID,alarmStartTime,alarmTimeStep,ierr=ierr)
+    if(ierr /= 0) &
+    call mpas_log_write('--- gocart2G_timetracker_init: error creating gocart2GaodAlarmID', &
+                             messageType=MPAS_LOG_CRIT)
+ endif
 
  call mpas_log_write('--- end subroutine gocart2G_timetracker_init.')
 

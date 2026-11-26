@@ -1,0 +1,310 @@
+<streams>
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="@MESH@.init.nc"
+                  input_interval="initial_only" />
+
+<immutable_stream name="restart"
+                  type="input;output"
+                  filename_template="restart.$Y-$M-$D_$h.$m.$s.nc"
+                  input_interval="initial_only"
+                  clobber_mode="overwrite"
+                  output_interval="1_00:00:00" />
+
+<stream name="output"
+        type="output"
+        filename_template="history.$Y-$M-$D_$h.$m.$s.nc"
+        clobber_mode="overwrite"
+        output_interval="@HISTORY_INTERVAL@" >
+
+	<file name="stream_list.atmosphere.output"/>
+</stream>
+
+<stream name="diagnostics"
+        type="output"
+        filename_template="diag.$Y-$M-$D_$h.$m.$s.nc"
+        clobber_mode="overwrite"
+        output_interval="3:00:00" >
+
+	<file name="stream_list.atmosphere.diagnostics"/>
+</stream>
+
+<stream name="aerosol"
+        type="output"
+        filename_template="aerosol.$Y-$M-$D_$h.$m.$s.nc"
+        clobber_mode="overwrite"
+        output_interval="1:00:00" >
+
+	<file name="stream_list.atmosphere.aerosol"/>
+</stream>
+
+<stream name="aod_obs"
+        type="input"
+        filename_template="modis_viirs_aod_3hr.@MESH@.$Y$M$D.nc"
+        filename_interval="1_00:00:00"
+        reference_time="2000-01-01_00:00:00"
+        input_interval="none">
+
+        <var name="AOD_mean"/>
+</stream>
+
+<stream name="aod_check"
+        type="output"
+        filename_template="aod_check.nc"
+        filename_interval="none"
+        clobber_mode="overwrite"
+        output_interval="00:12:00" >
+
+        <var name="xtime"/>
+        <var_array name="scalars"/>
+        <var name="pressure_p"/>
+        <var name="pressure_base"/>
+        <var name="totEXTTAU"/>
+        <var name="duEXTTAU"/>
+        <var name="ssEXTTAU"/>
+        <var name="suEXTTAU"/>
+        <var name="niEXTTAU"/>
+        <var name="bcEXTTAU"/>
+        <var name="ocEXTTAU"/>
+        <var name="brEXTTAU"/>
+        <var name="duCMASS"/>
+        <var name="ssCMASS"/>
+        <var name="SO4cmass"/>
+        <var name="niCMASS"/>
+        <var name="bcCMASS"/>
+        <var name="ocCMASS"/>
+        <var name="brCMASS"/>
+        <var name="observed_aod"/>
+        <var name="first_guess_aod"/>
+        <var name="analyzed_aod"/>
+        <var name="tropospheric_aod"/>
+        <var name="stratospheric_aod"/>
+        <var name="aod_scale_factor"/>
+        <var name="aod_update_applied"/>
+        <var name="aod_clamped_low"/>
+        <var name="aod_clamped_high"/>
+        <var name="aod_below_stratosphere"/>
+        <var name="aod_tropopause_pressure"/>
+</stream>
+
+<stream name="surface"
+        type="input"
+        filename_template="@MESH@.sfc_update.nc"
+        filename_interval="none"
+        input_interval="none" >
+
+	<file name="stream_list.atmosphere.surface"/>
+</stream>
+
+<immutable_stream name="fdda"
+                  type="input"
+                  filename_template="@MESH@.fdda.nc"
+                  input_interval="6:00:00" />
+
+<immutable_stream name="iau"
+                  type="input"
+                  filename_template="@MESH@.AmB.$Y-$M-$D_$h.$m.$s.nc"
+                  filename_interval="none"
+                  packages="iau"
+                  input_interval="initial_only" />
+
+<immutable_stream name="lbc_in"
+                  type="input"
+                  filename_template="lbc.$Y-$M-$D_$h.$m.$s.nc"
+                  filename_interval="input_interval"
+                  packages="limited_area"
+                  input_interval="3:00:00" />
+
+<immutable_stream name="ugwp_oro_data_in"
+                  type="input"
+                  filename_template="@MESH@.ugwp_oro_data.nc"
+                  packages="ugwp_orog_stream"
+                  input_interval="initial_only" />
+
+<immutable_stream name="ugwp_ngw_in"
+                  type="input"
+                  filename_template="ugwp_limb_tau.nc"
+                  packages="ugwp_ngw_stream"
+                  input_interval="initial_only" />
+
+<immutable_stream name="da_state"
+                  type="input;output"
+                  filename_template="mpasout.$Y-$M-$D_$h.$m.$s.nc"
+                  packages="jedi_da"
+                  input_interval="initial_only"
+                  output_interval="0_06:00:00" />
+
+<stream name="diag_ugwp"
+        type="output"
+        filename_template="diag_ugwp.$Y-$M-$D_$h.$m.$s.nc"
+        packages="ugwp_diags_stream"
+        output_interval="6:00:00" >
+
+	<file name="stream_list.atmosphere.diag_ugwp"/>
+</stream>
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="@MESH@-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="@MESH@-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="@MESH@-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="@MESH@-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="@MESH@-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="@MESH@-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="@MESH@-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_@MESH@.static_hourly_netcdf3.nc"
+        input_interval="none">
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_@MESH@.static_hourly_netcdf3.nc"
+        input_interval="none">
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_@MESH@.static_hourly_netcdf3.nc"
+        input_interval="none">
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_@MESH@.static_hourly_netcdf3.nc"
+        input_interval="none">
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_@MESH@.static_hourly_netcdf3.nc"
+        input_interval="none">
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_@MESH@.static_hourly_netcdf3.nc"
+        input_interval="none">
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_@MESH@.static_hourly_netcdf3.nc"
+        input_interval="none">
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="@MESH@-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="@MESH@-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="@MESH@-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="@MESH@-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="@MESH@-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+
+        <var name="mntb_biog_megan"/>
+</stream>
+</streams>

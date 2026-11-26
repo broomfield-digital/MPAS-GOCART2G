@@ -17,6 +17,9 @@ OBJS = \
 
 ifeq "$(GOCART2G)" "true"
 OBJS += \
+	mpas_chemistry_gocart2G_aod_constraint.o \
+	mpas_chemistry_gocart2G_aod_kernel.o \
+	mpas_chemistry_gocart2G_aod_obs.o \
 	mpas_chemistry_gocart2G_date_time.o \
 	mpas_chemistry_gocart2G_diagnostics.o \
 	mpas_chemistry_gocart2G_driver.o \
@@ -55,7 +58,17 @@ chem_interface: $(OBJS)
 
 
 # DEPENDENCIES:
+mpas_chemistry_gocart2G_aod_constraint.o: \
+	mpas_chemistry_gocart2G_aod_kernel.o \
+	mpas_chemistry_gocart2G_aod_obs.o \
+	mpas_chemistry_gocart2G_vars.o
+
+mpas_chemistry_gocart2G_aod_obs.o: \
+	mpas_chemistry_gocart2G_aod_kernel.o
+
 mpas_chemistry_gocart2G_driver.o: \
+	mpas_chemistry_gocart2G_aod_constraint.o \
+	mpas_chemistry_gocart2G_aod_obs.o \
 	mpas_chemistry_gocart2G_diagnostics.o \
 	mpas_chemistry_gocart2G_interface.o \
 	mpas_chemistry_gocart2G_manager.o \
@@ -78,6 +91,7 @@ mpas_chemistry_gocart2G_interface.o: \
 	mpas_chemistry_gocart2G_update.o
 
 mpas_chemistry_gocart2G_manager.o: \
+	mpas_chemistry_gocart2G_aod_obs.o \
 	mpas_chemistry_gocart2G_emissions_init.o \
 	mpas_chemistry_gocart2G_emissions_update.o \
 	mpas_chemistry_gocart2G_update.o

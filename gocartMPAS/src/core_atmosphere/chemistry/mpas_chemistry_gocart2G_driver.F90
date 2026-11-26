@@ -16,6 +16,8 @@
                                                SS2G_diagnostics,    &
                                                SU2G_diagnostics,    &
                                                GOCART2G_diagnostics
+ use mpas_chemistry_gocart2G_aod_constraint,only: gocart2G_aod_constraint,gocart2G_aod_report
+ use mpas_chemistry_gocart2G_aod_obs,only: aod_apply_now
  use mpas_chemistry_gocart2G_interface
  use mpas_chemistry_gocart2G_manager,only: iyear,imonth,iday,ihour,iminute,isecond
  use mpas_chemistry_gocart2G_rrtmg,only: GOCART2G_rrtmg
@@ -553,6 +555,7 @@
  type(mpas_pool_type),pointer:: SS2G_aops
  type(mpas_pool_type),pointer:: SU2G_aops
  type(mpas_pool_type),pointer:: GOCART2G_aops
+ type(mpas_pool_type),pointer:: aod_constraint
 
  type(block_type),pointer:: block
 
@@ -564,6 +567,7 @@
  logical,pointer:: to_MYNN
  logical,pointer:: to_RRTMG
  logical,pointer:: to_THOM
+ logical,pointer:: do_aod_constraint
 
  integer:: time_lev
  integer:: i,its,ite,j,jts,jte,k,kts,kte,n,nerod
@@ -588,6 +592,8 @@
  call mpas_pool_get_config(domain%configs,'config_gocart2G_toMYNN'   ,to_MYNN  )
  call mpas_pool_get_config(domain%configs,'config_gocart2G_toRRTMG'  ,to_RRTMG )
  call mpas_pool_get_config(domain%configs,'config_gocart2G_toTHOM'   ,to_THOM  )
+
+ call mpas_pool_get_config(domain%configs,'config_gocart2G_aod_constraint',do_aod_constraint)
 
  block => domain % blocklist
  do while(associated(block))
@@ -992,6 +998,23 @@
        call GOCART2G_diagnostics(mesh,GOCART2G,GOCART2G_diags,GOCART2G_aops,its,ite,jts,jte,kts,kte)
     endif
 
+    !--- AOD constraint: scale the aerosol toward the observed optical depth where it is due, then compute
+    !    again, from the constrained aerosol, the band optical properties that radiation will use:
+    if(do_aod_constraint .and. aod_apply_now .and. do_GOCART2G) then
+       call mpas_pool_get_subpool(block%structs,'gocart2G_aod_constraint',aod_constraint)
+       call gocart2G_aod_constraint(block%configs,aod_constraint,do_CA2Gbc,do_CA2Gbr,do_CA2Goc, &
+                                    do_DU2G,do_NI2G,do_SS2G,do_SU2G)
+       if(to_RRTMG) then
+          if(do_CA2Gbc) call CA2G_bc_params%rrtmg_GridComp(CA2G_bc,its,ite,jts,jte,kts,kte,nbndlw,nbndsw)
+          if(do_CA2Gbr) call CA2G_br_params%rrtmg_GridComp(CA2G_br,its,ite,jts,jte,kts,kte,nbndlw,nbndsw)
+          if(do_CA2Goc) call CA2G_oc_params%rrtmg_GridComp(CA2G_oc,its,ite,jts,jte,kts,kte,nbndlw,nbndsw)
+          if(do_DU2G)   call DU2G_params%rrtmg_GridComp(DU2G,its,ite,jts,jte,kts,kte,nbndlw,nbndsw)
+          if(do_NI2G)   call NI2G_params%rrtmg_GridComp(NI2G,its,ite,jts,jte,kts,kte,nbndlw,nbndsw)
+          if(do_SS2G)   call SS2G_params%rrtmg_GridComp(SS2G,its,ite,jts,jte,kts,kte,nbndlw,nbndsw)
+          if(do_SU2G)   call SU2G_params%rrtmg_GridComp(SU2G,its,ite,jts,jte,kts,kte,nbndlw,nbndsw)
+       endif
+    endif
+
 
     !--- fills global chemistry arrays with local chemistry arrays:
 ! 20260413_rkumar_start
@@ -1012,6 +1035,12 @@
 
     block => block % next
  end do
+
+!--- AOD constraint: one line in the log for this application, summed over all tasks:
+ if(do_aod_constraint .and. aod_apply_now) then
+    call gocart2G_aod_report(domain%dminfo)
+    aod_apply_now = .false.
+ endif
 
 
  call mpas_log_write('--- end subroutine gocart2G_chemistry_driver.')

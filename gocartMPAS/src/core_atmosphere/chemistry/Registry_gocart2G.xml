@@ -622,3 +622,4 @@
 #include "Registry_gocart2G_NI.xml"
 #include "Registry_gocart2G_SS.xml"
 #include "Registry_gocart2G_SU.xml"
+#include "Registry_gocart2G_aod_constraint.xml"

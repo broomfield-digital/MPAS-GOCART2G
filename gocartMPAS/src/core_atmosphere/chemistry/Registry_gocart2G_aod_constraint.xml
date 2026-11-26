@@ -1,0 +1,85 @@
+<!-- ======================================================================================================== -->
+<!-- AOD constraint: scale the aerosol toward aerosol optical depth observed at 550 nm.                       -->
+<!-- Code: mpas_chemistry_gocart2G_aod_{kernel,obs,constraint}.F90. The observations come from an input       -->
+<!-- stream named aod_obs, defined in the streams file like the emission streams.                             -->
+<!-- ======================================================================================================== -->
+
+ <nml_record name="aod_constraint" in_defaults="true">
+
+      <nml_option name="config_gocart2G_aod_constraint" type="logical" default_value="false"
+           units="-"
+           description="scale the aerosol so that the column optical depth at 550 nm matches the observations in the aod_obs stream, where there is a valid observation"
+           possible_values="true or false"/>
+
+      <nml_option name="config_gocart2G_aod_tropo_only" type="logical" default_value="true"
+           units="-"
+           description="scale only the layers below the layer that holds the tropopause, and hold the rest of the column fixed. False scales every layer"
+           possible_values="true or false"/>
+
+      <nml_option name="config_gocart2G_aod_interval" type="character" default_value="01:00:00"
+           units="-"
+           description="time interval between applications of the AOD constraint"
+           possible_values="`DD_HH:MM:SS'"/>
+
+      <nml_option name="config_gocart2G_aod_ratio_min" type="real" default_value="0.1"
+           units="-"
+           description="lower limit of the factor applied to the aerosol"
+           possible_values="real values between 0 and 1"/>
+
+      <nml_option name="config_gocart2G_aod_ratio_max" type="real" default_value="10.0"
+           units="-"
+           description="upper limit of the factor applied to the aerosol"
+           possible_values="real values of 1 or more"/>
+
+      <nml_option name="config_gocart2G_aod_eps" type="real" default_value="0.01"
+           units="-"
+           description="the aerosol is not scaled where the optical depth of the layers that may be scaled is below this value"
+           possible_values="positive real values"/>
+
+ </nml_record>
+
+ <var_struct name="gocart2G_aod_constraint" time_levs="1">
+
+      <var name="AOD_mean" type="real" dimensions="nCells Time" units="unitless"
+           description="observed aerosol optical depth at 550 nm as read from the aod_obs stream; negative where there is no observation"/>
+
+      <var name="aod_obs_before" type="real" dimensions="nCells Time" units="unitless"
+           description="observation record at or before the current time; negative where there is no observation"/>
+
+      <var name="aod_obs_after" type="real" dimensions="nCells Time" units="unitless"
+           description="observation record at or after the current time; negative where there is no observation"/>
+
+      <var name="observed_aod" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: observed optical depth at 550 nm interpolated to the time of the update; -999 where there is none"/>
+
+      <var name="first_guess_aod" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: model column optical depth at 550 nm before the update"/>
+
+      <var name="analyzed_aod" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: model column optical depth at 550 nm after the update"/>
+
+      <var name="tropospheric_aod" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: first-guess optical depth of the layers that may be scaled"/>
+
+      <var name="stratospheric_aod" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: first-guess optical depth of the layers held fixed"/>
+
+      <var name="aod_scale_factor" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: factor applied to the aerosol; 1 where there was no update"/>
+
+      <var name="aod_update_applied" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: 1 where the aerosol was scaled toward an observation, 0 elsewhere"/>
+
+      <var name="aod_clamped_low" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: 1 where the factor was held at its lower limit"/>
+
+      <var name="aod_clamped_high" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: 1 where the factor was held at its upper limit"/>
+
+      <var name="aod_below_stratosphere" type="real" dimensions="nCells Time" units="unitless"
+           description="AOD constraint: 1 where the observation was smaller than the optical depth held fixed"/>
+
+      <var name="aod_tropopause_pressure" type="real" dimensions="nCells Time" units="Pa"
+           description="AOD constraint: tropopause pressure used to separate the layers; 0 where no layer holds it"/>
+
+ </var_struct>
