@@ -1,0 +1,24 @@
+# SHA-256 of the public inputs fetched by scripts/fetch_inputs.sh.
+# Paths are relative to $G2G_WORK/inputs. Recorded 2026-11-26.
+#
+# geog:   https://www2.mmm.ucar.edu/wrf/src/wps_files/
+# mesh:   https://www2.mmm.ucar.edu/projects/mpas/atmosphere_meshes/
+# optics: https://noaa-ufs-regtests-pds.s3.amazonaws.com/input-data-20251015/GOCART/p8c_5d/ExtData/
+9475bcc76119474ff4fe36215b7101c478d381097904d7c9b5e56a121470c2da  geog/clayfrac_5m.tar.bz2
+a508b15bc7bc85ba3c34bdf01f0e8c0c582666bd739331333d289a5772edccd7  geog/erod.tar.bz2
+53e169f64237d1ade90bd40813e40181e0da640413cc27c32ce093d2c3444815  geog/sandfrac_5m.tar.bz2
+bbe83893c0cb347f3b6fae497c11cde7bef42e1cd0a6fc7db3a961ca3e4f9266  mesh/x1.40962/x1.40962_static.tar.gz
+37a423f0bbb1cfdfdc22bc0ef2fab41218ae9453932f89603a1d18bcbec7675e  mesh/x1.40962/x1.40962.tar.gz
+b90131256d0ad57b3175afbd684a16c851fde8b66bb4439fbd7ef30fb73defe0  optics/raw/opticsBands_BC.v1_3.RRTMG.nc
+644928a0a0ec39bc98cdc5805616230cbefff973afed2f8c377229ef3c4693de  optics/raw/opticsBands_DU.v15_3.RRTMG.nc
+6efdbcd64a31fdb3d52755969918ac1b1313c940bb587c7d325e74fa85ee5e6e  optics/raw/opticsBands_NI.v2_5.RRTMG.nc
+453f270d9c8cfce60771bb8c3c00329b2e13a6c0812bd909c0a1546efdc67699  optics/raw/opticsBands_OC.v1_3.RRTMG.nc
+0aff4b0664d031c24d2bb0718a79d70aa4d223ff5309e65ed812bdbb507f7cc7  optics/raw/opticsBands_SS.v3_3.RRTMG.nc
+00c2dead267b289b9e389fe9c05037e35b22ea85e1112ec817363f0f59984d7d  optics/raw/opticsBands_SU.v1_3.RRTMG.nc
+c395abf32c5c8aca8a6a1fb9d9e4fbad6edcfef50f54b27e6fa66b58fdecb73b  optics/raw/optics_BC.v1_3.nc
+e357a56dfcbd673f29b6f7935ac0faa8de23bbc0ed953596cec20738d7a2b427  optics/raw/optics_BRC.v1_5.nc
+933cba60cb2921aaa382bb28f63bf4276512b10f0d51fa6f81a83166e7ffd558  optics/raw/optics_DU.v15_3.nc
+45e4e2d3a5234b509d72b610bf87c880ed916b9e775a1ef4b9340e454334b318  optics/raw/optics_NI.v2_5.nc
+d3a2a2424e560fecd07ffc5898e1d53bf0c74c8018c7a49ea1711bec64849cdc  optics/raw/optics_OC.v1_3.nc
+313e1e8e05fabc99de458c9b560ac8733c9b4a5a1b3457cfb9e07b3563edc682  optics/raw/optics_SS.v3_3.nc
+d41c16bf8703d8c2b841cccc2da5d0f65141034a5b0cb8f831337c24061c96f8  optics/raw/optics_SU.v1_3.nc

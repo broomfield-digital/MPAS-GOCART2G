@@ -1,0 +1,4 @@
+interface:
+  display_name: "MPAS-GOCART2G Build"
+  short_description: "Build the init_atmosphere and atmosphere executables"
+  default_prompt: "Use $gocart2g-build to build the MPAS-GOCART2G executables."

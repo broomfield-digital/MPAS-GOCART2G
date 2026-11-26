@@ -1,0 +1,4 @@
+interface:
+  display_name: "MPAS-GOCART2G Inputs"
+  short_description: "Fetch and derive mesh, optics, meteorology, and emission inputs"
+  default_prompt: "Use $gocart2g-prepare-inputs to prepare the inputs for an MPAS-GOCART2G run."

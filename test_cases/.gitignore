@@ -1,0 +1,5 @@
+# The repository-wide .gitignore hides MPAS run-time configuration files.
+# The reference copies under test_cases/ are tracked on purpose.
+!namelist.*
+!streams.*
+!stream_list.*

@@ -1,0 +1,4 @@
+interface:
+  display_name: "MPAS-GOCART2G Test Run"
+  short_description: "Stage, run, and check an MPAS-GOCART2G test case"
+  default_prompt: "Use $gocart2g-run-test to run and check the natural_120km test case."
