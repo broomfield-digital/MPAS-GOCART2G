@@ -27,27 +27,33 @@
 # which exFAT, FAT, and NTFS cannot store. The drive must be mounted whenever
 # the linked directories are read or updated.
 #
+# Sizes are from the inventory of 2026-11-26 (scripts/derecho_inventory.txt).
+#
 # Sets that do not depend on the mesh, usable with the 120-km test cases:
-#   templates    reference namelist and stream templates, submission scripts
-#   background   BACKGROUND_*.dat oxidant, DMS, and tropopause climatologies
-#   optics       GOCART-2G Mie tables, including any brown-carbon band file
-#   merra2       MERRA-2 aerosol intermediate files of Example-1
-#   core         all four of the above
+#   templates      0.1 MB  reference namelist and stream templates, submit script
+#   background     0.7 GB  BACKGROUND_{sulf,dms,ptrop}.dat climatologies
+#   optics         1.5 GB  the Mie tables the reference namelist names (v*_5)
+#   merra2         1.9 GB  MERRA-2 aerosol intermediate file for 2024-10-15 00 UTC
+#   core           4.1 GB  all four of the above
+#   merra2-all      11 GB  MERRA-2 intermediate files for 2024-10-15 to 20
+#   optics-extra   2.4 GB  optics_new_files/: also the Registry-default versions
+#   gfs            4.6 GB  GFS intermediate files for 2024-10-15 to 20
 #
 # Sets tied to the tutorial's 60-km mesh (x1.163842):
-#   gfs          GFS intermediate files of Example-1
-#   emis60       processed emission files of Example-1
-#   grid60       grid, static, static_chems, and partition files of Example-1
-#   example1     gfs + merra2 + emis60 + grid60 + background
+#   emis60          11 GB  processed emission files of Example-1
+#   grid60         0.8 GB  grid, static, static_chems, and partition files
+#   example1        28 GB  gfs + merra2-all + emis60 + grid60 + background
 #
 # Raw material for regridding emissions to another mesh with UPTEMPO:
-#   emis-raw     CAMS and FINN inventories; size unknown, use --dry-run first
-#   regrid60     60-km grid, static, and SCRIP files kept directly under input/
+#   emis-raw-2024  7.4 GB  CAMS-GLOB-ANT 2024, CAMS-GLOB-BIO, FINN 2024 text
+#                          files, and the two CAMS grid-description files
+#   emis-raw        38 GB  every year of CAMS-GLOB-ANT plus FINN 2012
+#   regrid60       0.6 GB  60-km grid, static, and SCRIP files under input/
 #
-# The directory names come from docs/tutorial.md, util/submit_mpas_gocart.bash,
-# and the UPTEMPO configuration files. Their contents were not visible when
-# this script was written; scripts/derecho_inventory.sh, run on Derecho, lists
-# them. A path that does not exist is reported and the other paths still copy.
+# Never copied: archive/ directories (superseded files) and the twelve monthly
+# BACKGROUND_sulf_NN.dat pieces, which the model does not read.
+#
+# A path that does not exist is reported and the other paths still copy.
 #
 # NCAR recommends Globus for large transfers. The collection for these paths is
 # "NCAR Campaign Storage".
@@ -63,20 +69,23 @@ dest="$G2G_INPUTS/derecho"
 set_paths() {  # print the paths, relative to the root, that make up a set
     case "$1" in
         templates)  echo "input/namelist_files/ input/stream_files/ scripts/" ;;
-        background) echo "input/BACKGROUND/ input/Example-1/BACKGROUND/" ;;
+        background) echo "input/BACKGROUND/" ;;
         optics)     echo "input/optics_files/" ;;
-        merra2)     echo "input/Example-1/MERRA2/" ;;
+        optics-extra) echo "input/optics_files/optics_new_files/" ;;
+        merra2)     echo "input/Example-1/MERRA2/MERRA2:2024-10-15_00" ;;
+        merra2-all) echo "input/Example-1/MERRA2/" ;;
         core)       echo "$(set_paths templates) $(set_paths background) $(set_paths optics) $(set_paths merra2)" ;;
         gfs)        echo "input/Example-1/GFS/" ;;
         emis60)     echo "input/Example-1/EMIS/" ;;
         grid60)     echo "input/Example-1/GRID/" ;;
         example1)   echo "input/Example-1/" ;;
         emis-raw)   echo "input/EMIS/" ;;
+        emis-raw-2024) echo "input/EMIS/ input/Gridinfo_CAMS-GLOB-ANT_c20240709.nc input/Gridinfo_CAMS-GLOB-BIOG_c20260116.nc" ;;
         regrid60)   echo "input/x1.163842.grid.nc input/x1.163842.static.nc input/mpas_scrip.163842.nc" ;;
         *) return 1 ;;
     esac
 }
-ALL_SETS="templates background optics merra2 core gfs emis60 grid60 example1 emis-raw regrid60"
+ALL_SETS="templates background optics merra2 core merra2-all optics-extra gfs emis60 grid60 example1 emis-raw-2024 emis-raw regrid60"
 
 # Directories that may live on G2G_BULK: large, and free of colon-named files.
 BULK_PATHS="input/EMIS input/Example-1/EMIS input/Example-1/GRID"
@@ -88,7 +97,7 @@ for arg in "$@"; do
         --dry-run) dry_run=true ;;
         --sets)
             for s in $ALL_SETS; do
-                printf '%-11s' "$s"
+                printf '%-14s' "$s"
                 for p in $(set_paths "$s"); do printf ' %s' "$root/$p"; done
                 printf '\n'
             done
@@ -100,6 +109,18 @@ for arg in "$@"; do
 done
 [ "${#sets[@]}" -gt 0 ] || g2g_die "name at least one set (see --help)"
 command -v rsync >/dev/null || g2g_die "rsync not on PATH"
+
+has_set() { local s; for s in "${sets[@]}"; do [ "$s" = "$1" ] && return 0; done; return 1; }
+
+# rsync filter rules; the first matching rule decides.
+filters=(--exclude=archive/ '--exclude=BACKGROUND_sulf_[0-9][0-9].dat')
+if has_set emis-raw-2024; then
+    has_set emis-raw && g2g_die "choose either emis-raw or emis-raw-2024"
+    filters+=('--include=CAMS-GLOB-ANT_v6.2_*_2024.nc' '--exclude=CAMS-GLOB-ANT_*' --exclude=FINN25/)
+fi
+if (has_set optics || has_set core) && ! has_set optics-extra; then
+    filters+=(--exclude=optics_new_files/)
+fi
 
 # Unique relative paths, in the order requested.
 declare -A seen=()
@@ -184,7 +205,7 @@ $dry_run && echo "dry run: nothing will be copied"
 [ "$host" = local ] || echo "Expect one password and Duo prompt."
 
 status=0
-rsync "${opts[@]}" "${sources[@]}" "$dest/" 2> >(tee "$log" >&2) || status=$?
+rsync "${opts[@]}" "${filters[@]}" "${sources[@]}" "$dest/" 2> >(tee "$log" >&2) || status=$?
 
 case "$status" in
     0) ;;

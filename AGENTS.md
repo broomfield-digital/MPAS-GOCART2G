@@ -173,10 +173,10 @@ use the `f000` file; the `.anl` file lacks the surface and soil fields. It has
 |---|---|---|
 | Mesh, static file, partitions | MPAS mesh downloads | public, `fetch_inputs.sh` |
 | Dust source tiles | WPS geog downloads | public, `fetch_inputs.sh` |
-| Optics tables | NOAA UFS regression-test bucket (the GEOS files) | public, `fetch_inputs.sh`; no `opticsBands_BRC` file, so no brown carbon |
+| Optics tables | NOAA UFS regression-test bucket (the GEOS files) | public, `fetch_inputs.sh`: the Registry-default versions, without a brown-carbon band file. The versions the reference namelist names are on Derecho (`fetch_derecho_inputs.sh optics`) |
 | Meteorology | NOAA GFS on AWS, via WPS ungrib | public, `prepare_gfs.sh` |
-| Anthropogenic and biogenic emissions | CAMS-GLOB-ANT v6.2, CAMS-GLOB-BIO v3.1 through `UPTEMPO/` | needs an ECCAD account and ESMF; not automated here |
-| Fire emissions | FINN v2.5.1 through `UPTEMPO/` | text files are public; not automated here |
+| Anthropogenic and biogenic emissions | CAMS-GLOB-ANT v6.2, CAMS-GLOB-BIO v3.1 through `UPTEMPO/` | raw files are on Derecho (`fetch_derecho_inputs.sh emis-raw-2024`) or need an ECCAD account; regridding needs ESMF and is not automated here |
+| Fire emissions | FINN v2.5.1 through `UPTEMPO/` | text files are public and on Derecho; regridding is not automated here |
 | Background oxidants, DMS, tropopause | `BACKGROUND_*.dat` | only on Derecho; `fetch_derecho_inputs.sh background` |
 | Aerosol initial condition | MERRA-2 through `init_MPAS-GOCART2G/` | needs a NASA Earthdata login; the Example-1 files are on Derecho (`fetch_derecho_inputs.sh merra2`) |
 | Reference namelist and stream templates | `/glade/campaign/acom/MUSICA/MPAS/input/{namelist_files,stream_files}` | only on Derecho, not in this repository; `fetch_derecho_inputs.sh templates` |
@@ -187,10 +187,32 @@ only the public rows.
 
 `scripts/fetch_derecho_inputs.sh` pulls the Derecho rows over SSH into
 `$G2G_WORK/inputs/derecho/`. It prompts for an NCAR password and Duo approval,
-so the maintainer has to run it. `scripts/derecho_inventory.sh` runs on
-Derecho itself and lists what the input directories really contain; the
-download script's paths come from this repository's documentation and have
-not been checked against such a listing.
+so the maintainer has to run it. Its sets and sizes follow
+`scripts/derecho_inventory.txt`, a listing of the Derecho input directories
+with the full text of the reference namelist and stream templates, made on
+2026-11-26 by running `scripts/derecho_inventory.sh` there. Rerun that script
+on Derecho to refresh it. What the listing established:
+
+- Every product on Derecho is for the 60-km mesh. Nothing exists for
+  `x1.40962`, so emissions at 120 km have to be regridded from the raw
+  inventories.
+- The reference namelist names newer optics tables than the Registry
+  defaults: `v1_5` for BC and OC, `v2_5` for SU, BRC, and NI, `v15_5` for DU,
+  and `v3_5` for SS, each with its `opticsBands_*.RRTMG.nc` file. The table
+  names are namelist options (`config_gocart2G_optics*`).
+- The reference flow differs from the two passes used here. Its static stage
+  starts from the grid file and redoes all static interpolation, which needs
+  the complete WPS geographical dataset; its chemistry stage then does the
+  vertical grid, meteorology, and all GOCART-2G options in one pass. Both
+  flows give the chemistry stage an input file that already holds `erod`.
+- The reference atmosphere namelist is for 60 km (`config_dt = 360`,
+  `config_len_disp = 60000`), uses `config_number_of_sub_steps = 4`, turns on
+  every aerosol component, and reads fire emissions hourly
+  (`config_gocart2G_biobemis_interval`). The reference init namelist uses
+  `config_extrap_airtemp = 'linear'`.
+- The reference stream files define the same 19 emission streams, with the
+  same variables, as `scripts/make_zero_emissions.py` writes for the
+  atmosphere core. All seven fire streams read one hourly FINN file.
 
 ## Test cases
 

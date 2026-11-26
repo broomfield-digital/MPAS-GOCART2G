@@ -54,24 +54,29 @@ Copying them needs the maintainer's NCAR password and Duo approval, so an
 agent cannot run the transfer unattended. Ask the maintainer to run it:
 
 ```bash
-scripts/fetch_derecho_inputs.sh --sets            # sets and their remote paths
+scripts/fetch_derecho_inputs.sh --help            # sets with their sizes
 scripts/fetch_derecho_inputs.sh --dry-run core    # names and total size only
-scripts/fetch_derecho_inputs.sh core              # templates, background, optics, MERRA-2
+scripts/fetch_derecho_inputs.sh core              # 4 GB: templates, background, optics, MERRA-2
+scripts/fetch_derecho_inputs.sh emis-raw-2024     # 7 GB: raw CAMS and FINN for 2024
 ```
 
 Files land in `$G2G_WORK/inputs/derecho/` under the same relative paths. If
 the internal disk is short of space, `G2G_BULK=/path/on/another/drive` sends
 the large emission and grid directories there and links them into that tree;
 the drive may be exFAT, and it must be mounted whenever those directories are
-used. The `core` sets do not depend on the mesh. The `emis60` and `grid60` sets are on
-the tutorial's 60-km mesh and cannot be used on another mesh; emissions for
-another mesh must be regridded with `UPTEMPO/` from the `emis-raw` set.
+used.
 
-The directory names in the script come from this repository's documentation,
-not from a listing. To see what is really there, run
+The `core` sets do not depend on the mesh. Everything processed on Derecho is
+for the tutorial's 60-km mesh: `emis60` and `grid60` cannot be used on another
+mesh, and emissions for another mesh must be regridded with `UPTEMPO/` from
+the raw inventories.
+
+`scripts/derecho_inventory.txt` lists what the Derecho directories held on
+2026-11-26, with sizes and the full text of the reference namelist and stream
+templates. Read it before guessing a file name. To refresh it, run
 `scripts/derecho_inventory.sh` on a Derecho or Casper login node (it is
-self-contained and read-only) and bring the output back. Its output can
-contain user names, so keep it out of the repository.
+self-contained and read-only). Check a new listing for user names before
+committing it; the current one has none.
 
 ## Rules for any new input file
 

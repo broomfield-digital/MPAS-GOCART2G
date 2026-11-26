@@ -40,6 +40,22 @@ This case is a software test. Three inputs are placeholders:
 Dust and sea-salt emissions are computed by the model from its own winds and
 surface fields, so those two components are real, only unspun.
 
+## Differences from the Derecho reference configuration
+
+Compared with the reference templates listed in `scripts/derecho_inventory.txt`,
+beyond the three placeholders above and the mesh:
+
+| Setting | Here | Reference |
+|---|---|---|
+| Components | dust and sea salt | all eight |
+| Optics tables | `DU.v15_3`, `SS.v3_3` (Registry defaults) | `DU.v15_5`, `SS.v3_5` |
+| `config_number_of_sub_steps` | 2 (model default) | 4 |
+| `config_extrap_airtemp` | `lapse-rate` (model default) | `linear` |
+| Init flow | two passes from the downloaded static file | static interpolation from the grid file, then one chemistry pass |
+
+The time step and `config_len_disp` differ only because the mesh does: the
+model sets `config_len_disp` to 120 km from the mesh file.
+
 ## What it exercises
 
 Both `init_atmosphere` passes with the GOCART-2G static, emission, and
