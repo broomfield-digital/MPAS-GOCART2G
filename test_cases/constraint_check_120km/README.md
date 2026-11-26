@@ -41,6 +41,7 @@ twin's. Reference results (GNU, single precision, 8 ranks):
 | After one step, scaled tracers against the twin | equal to the twin times the factor, to 6e-8, in 269811 layers |
 | Layers changed above the tropopause pressure | 0 |
 | Unscaled tracers, and columns without an observation | bit-identical to the twin |
+| The same run on 4 ranks | passes; the counts and means in the log agree with 8 ranks to the six digits printed |
 
 The factor staying near 1 on re-application is the test that the whole
 aerosol the optics sees was scaled: the model's optics at the next step are
