@@ -1,0 +1,4 @@
+interface:
+  display_name: "MPAS-GOCART2G AOD Constraint"
+  short_description: "Run and check the AOD constraint"
+  default_prompt: "Use $gocart2g-aod-constraint to run and check a constrained MPAS-GOCART2G run."

@@ -57,8 +57,10 @@ workstation: `scripts/`, `test_cases/`, and these agent files.
 | `UPTEMPO/` | emission preprocessing (CAMS, FINN) onto an MPAS mesh (upstream) |
 | `init_MPAS-GOCART2G/` | MERRA-2 to MPAS intermediate-file conversion (upstream) |
 | `docs/`, `util/` | Derecho tutorial and PBS submission script (upstream) |
+| `gocartMPAS/src/core_atmosphere/chemistry/*aod*` | the AOD constraint (fork): `mpas_chemistry_gocart2G_aod_{kernel,obs,constraint}.F90`, `Registry_gocart2G_aod_constraint.xml` |
 | `scripts/` | workstation build, input, run, and check scripts (fork) |
 | `test_cases/` | tracked reference namelists and streams per test case (fork) |
+| `tests/fortran/` | unit tests compiled outside the model (fork) |
 | `.agents/skills/` | task recipes; each entry in `.claude/skills/` is a symlink to one of them |
 
 ## Workstation quick start
@@ -183,6 +185,85 @@ use the `f000` file; the `.anl` file lacks the surface and soil fields. It has
 - A cold start reports `Variable qi not in input file` and five similar
   warnings. They are expected.
 
+### AOD constraint (`&aod_constraint`, added in this fork)
+
+Where there is a valid observation of aerosol optical depth (AOD) at 550 nm,
+the aerosol mass of the column is multiplied by one factor so that the
+modelled column AOD matches the observation. It is a replacement of the
+aerosol state with no relaxation time, following the AOD nudging of
+CESM3-CAM7 (`NCAR/CERES-SARB-CAM7`). Off by default; with it off the model's
+results are unchanged.
+
+| Option | Default | Meaning |
+|---|---|---|
+| `config_gocart2G_aod_constraint` | `false` | turn the constraint on |
+| `config_gocart2G_aod_tropo_only` | `true` | scale only the layers below the layer that holds the tropopause; `false` scales every layer |
+| `config_gocart2G_aod_interval` | `'01:00:00'` | time between applications |
+| `config_gocart2G_aod_ratio_min`, `_max` | `0.1`, `10.0` | limits of the factor |
+| `config_gocart2G_aod_eps` | `0.01` | no update where the AOD of the layers that may be scaled is below this |
+
+- **The arithmetic.** With `tau(k)` the layer optical depth at 550 nm,
+  `eligible` its sum over the layers that may be scaled, and `fixed` the rest:
+  `factor = clamp(max(observed - fixed, 0) / eligible, min, max)`, and 1 where
+  there is no observation or `eligible < eps`. The column afterwards is
+  `fixed + factor * eligible`. `tau(k)` is recovered from the extinction
+  coefficient the diagnostics have just computed,
+  `extcoef * delp / (grav * airdens)`, which is how that coefficient was formed.
+- **Where it acts.** At the end of `gocart2G_chemistry_driver`, after the
+  550 nm diagnostics and before the tracers are written back. The radiation
+  band optics are then computed again from the constrained aerosol. The
+  alarm and the reading of observations are in `gocart2G_timetracker`.
+- **What is scaled.** Every particulate tracer the aerosol processes use: dust,
+  sea salt, sulfate (`qso4`), nitrate (`qni1-3`), black, brown, and organic
+  carbon, ammonium (`qnh4a`), and MSA. Not the gases, the SOA precursors, or
+  `qso2v` and `qso4v`. Ammonium must be scaled with sulfate and nitrate:
+  without it, fine nitrate evaporated within one time step in strongly scaled
+  columns (`test_cases/constraint_check_120km/README.md`).
+- **The tropopause** is the monthly climatology `background_ptrop`, which
+  comes from `BACKGROUND_ptrop.dat` (`config_gocart2G_clim`). The layer that
+  holds that pressure and every layer above it are never changed. Where the
+  pressure is not usable (not positive, or outside the column) no layer
+  qualifies and the column is not scaled; the log counts such cells as
+  "without a tropopause layer". A case without the climatology
+  (`natural_120km`) has not been run with the constraint. GOCART-2G's own
+  stratospheric optical depth (`totSTEXTTAU`) is not used: its arguments are
+  commented out in every component of this port and it is zero.
+- **Observation files.** One CDF-5 file per UTC day,
+  `modis_viirs_aod_3hr.<mesh>.<YYYYMMDD>.nc`, with eight records. `xtime` is
+  the **center** of each 3-hour window (`_01:30:00`, `_04:30:00`, ...).
+  `AOD_mean(Time, nCells)` holds the observation, cells in mesh order, and any
+  negative value (the files use -999) where there is none; `latCell` and
+  `lonCell` identify the mesh. `AOD_uncertainty` and `AOD_count` may be present
+  and are not read. The model interpolates in time between the two records
+  around the current time; a record more than three hours away is not used.
+  Files are needed from three hours before the start to three hours after the
+  stop. The stream goes in the streams file:
+
+  ```xml
+  <stream name="aod_obs" type="input"
+          filename_template="modis_viirs_aod_3hr.x1.40962.$Y$M$D.nc"
+          filename_interval="1_00:00:00" reference_time="2000-01-01_00:00:00"
+          input_interval="none">
+          <var name="AOD_mean"/>
+  </stream>
+  ```
+- **Diagnostics** (`gocart2G_aod_constraint` variables): `observed_aod`,
+  `first_guess_aod`, `analyzed_aod`, `tropospheric_aod` (eligible),
+  `stratospheric_aod` (fixed), `aod_scale_factor`, the 0-or-1 flags
+  `aod_update_applied`, `aod_clamped_low`, `aod_clamped_high`,
+  `aod_below_stratosphere`, and `aod_tropopause_pressure`. They hold the most
+  recent application. `totEXTTAU` and the other GOCART-2G diagnostics are
+  computed before an update, so they are first-guess values. Each application
+  writes two lines to the log, starting `AOD constraint:`.
+- **The first guess is not a control.** It carries the earlier updates. The
+  control is a twin run with the constraint off: `run_case.sh CASE --free`.
+- **Side effects to keep in mind.** With `config_gocart2G_toTHOM` on, the
+  Thompson scheme also sees the scaled aerosol. Observations are clear-sky
+  retrievals; the modelled column is not screened for cloud.
+- **Tests.** `scripts/test_aod_kernel.sh` (arithmetic, outside the model);
+  `test_cases/constraint_check_120km` with its twin and
+  `scripts/check_aod_constraint.py` (the update inside the model).
+
 ## Where the inputs come from
 
 | Input | Source | Status on a workstation |
@@ -195,6 +276,7 @@ use the `f000` file; the `.anl` file lacks the surface and soil fields. It has
 | Fire emissions | FINN v2.5.1 through `UPTEMPO/` | text files are public and on Derecho; `regrid_emissions.sh fire` regrids them |
 | Background oxidants, DMS, tropopause | `BACKGROUND_*.dat` | only on Derecho; `fetch_derecho_inputs.sh background` |
 | Aerosol initial condition | MERRA-2 through `init_MPAS-GOCART2G/` | needs a NASA Earthdata login; the Example-1 files are on Derecho (`fetch_derecho_inputs.sh merra2`) |
+| AOD observations for the constraint | MODIS and VIIRS Level-2, gridded to the mesh | not made in this repository; `scripts/make_synthetic_aod_obs.py` writes test files, `scripts/check_aod_obs.py` checks real ones |
 | Reference namelist and stream templates | `/glade/campaign/acom/MUSICA/MPAS/input/{namelist_files,stream_files}` | only on Derecho, not in this repository; `fetch_derecho_inputs.sh templates` |
 
 The Derecho example (`docs/tutorial.md`, `util/submit_mpas_gocart.bash`) uses
@@ -244,6 +326,9 @@ seen in that case; read it before interpreting a run.
 | `merra2_120km` | `x1.40962`, 55 levels | all eight components from a MERRA-2 start, reference backgrounds and optics, zero inventory emissions | public plus `fetch_derecho_inputs.sh core` |
 | `full_120km` | `x1.40962`, 55 levels | as `merra2_120km`, with CAMS and FINN emissions regridded to the mesh; the analog of the tutorial's Example-1 | also `fetch_derecho_inputs.sh emis-raw-2024` and `regrid_emissions.sh` |
 
+| `constraint_check_120km` | `x1.40962`, 55 levels | as `full_120km`, with the AOD constraint at every step toward synthetic observations | as `full_120km` |
+| `constrained_120km` | `x1.40962`, 55 levels | as `full_120km`, with the AOD constraint hourly toward MODIS/VIIRS | as `full_120km`, and observation files on the mesh |
+
 To add a case, copy a case directory, edit `case.env` and the templates, and
 list it here. Keep the README honest about which inputs are synthetic.
 
@@ -258,6 +343,7 @@ needs both the folder and the symlink.
 | `gocart2g-build` | build or rebuild the executables and diagnose build failures |
 | `gocart2g-prepare-inputs` | fetch or derive model inputs, including a new date or mesh |
 | `gocart2g-run-test` | stage, run, check, and report a test case |
+| `gocart2g-aod-constraint` | configure, run, check, and diagnose a run with the AOD constraint |
 
 Keep this table, the skill files, and the scripts consistent when any of them
 changes.

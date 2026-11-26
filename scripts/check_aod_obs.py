@@ -19,7 +19,7 @@ import netCDF4
 import numpy as np
 
 WINDOW_CENTERS = [f"{hour:02d}:30:00" for hour in range(1, 24, 3)]
-CELL_TOLERANCE = 1e-9  # radians
+CELL_TOLERANCE = 1e-6  # radians, about 6 m: a single-precision run file against a double-precision mesh file
 
 
 def check(path: Path, lat: np.ndarray, lon: np.ndarray) -> tuple[list[str], float]:
