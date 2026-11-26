@@ -164,7 +164,20 @@ mkdir -p "$dest" "$G2G_LOGS"
 log="$G2G_LOGS/fetch_derecho_inputs.log"
 
 if [ -n "${G2G_BULK:-}" ]; then
-    [ -d "$G2G_BULK" ] && [ -w "$G2G_BULK" ] || g2g_die "G2G_BULK=$G2G_BULK is not a writable directory (is the drive mounted?)"
+    # Create the folder itself, but never its parent: a missing parent means
+    # the drive is not mounted, and creating it would put data on the wrong disk.
+    if [ ! -d "$G2G_BULK" ]; then
+        bulk_parent="$(dirname "$G2G_BULK")"
+        [ -d "$bulk_parent" ] || g2g_die "G2G_BULK=$G2G_BULK: $bulk_parent does not exist (is the drive mounted?)"
+        if $dry_run; then
+            [ -w "$bulk_parent" ] || g2g_die "G2G_BULK=$G2G_BULK cannot be created: $bulk_parent is not writable"
+        else
+            mkdir "$G2G_BULK" || g2g_die "cannot create G2G_BULK=$G2G_BULK"
+            echo "bulk: created $G2G_BULK"
+        fi
+    elif [ ! -w "$G2G_BULK" ]; then
+        g2g_die "G2G_BULK=$G2G_BULK is not writable"
+    fi
 fi
 for bp in $BULK_PATHS; do
     covered=false
