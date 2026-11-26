@@ -1,0 +1,2760 @@
+MPAS-GOCART2G Derecho inventory
+root: /glade/campaign/acom/MUSICA/MPAS
+date: 2026-11-26T18:46:14Z
+
+==== top level of root ====
+d  gocartMPAS
+d  input
+d  MPAS-GOCART2G
+d  scripts
+
+==== directory sizes under input/ (depth 2) ====
+77G	input
+1.3G	input/BACKGROUND
+38G	input/EMIS
+28G	input/EMIS/CAMS_ANTH
+1019M	input/EMIS/CAMS_BIOG
+6.5G	input/EMIS/FINN25
+2.7G	input/EMIS/FINN2nrt
+34G	input/Example-1
+1.3G	input/Example-1/BACKGROUND
+16G	input/Example-1/EMIS
+4.6G	input/Example-1/GFS
+812M	input/Example-1/GRID
+11G	input/Example-1/MERRA2
+17K	input/MERRA2
+21K	input/namelist_files
+2.0K	input/namelist_files/archive
+3.9G	input/optics_files
+2.4G	input/optics_files/optics_new_files
+116K	input/stream_files
+34K	input/stream_files/archive
+1.0K	input/tables
+
+==== input/namelist_files ====
+total: 21K
+files (to depth 3): 7
+        3584  2026-07-31  archive/namelist.atmosphere.sh
+        2112  2026-05-15  archive/namelist.init_atmosphere.sh
+        3587  2026-10-21  namelist.chem.atmosphere.sh
+        2114  2026-10-21  namelist.chem.init_atmosphere.sh
+        4111  2026-10-21  namelist.nudging.atmosphere.sh
+        2115  2026-10-21  namelist.nudging.init_atmosphere.sh
+        1835  2026-10-21  namelist.static.init_atmosphere.sh
+
+==== input/stream_files ====
+total: 116K
+files (to depth 3): 10
+         145  2025-11-27  archive/stream_list.output
+        5747  2026-10-12  archive/streams.atmosphere
+        5855  2026-10-12  archive/streams.init_atmosphere
+        1884  2026-11-03  stream_list.atmosphere.diagnostics
+         145  2026-10-21  stream_list.atmosphere.output
+        6104  2026-11-04  streams.chem.atmosphere
+        5935  2026-10-21  streams.chem.init_atmosphere
+        6291  2026-11-04  streams.nudging.atmosphere
+        5498  2026-10-21  streams.nudging.init_atmosphere
+        5535  2026-10-21  streams.static.init_atmosphere
+
+==== scripts ====
+total: 51K
+files (to depth 3): 3
+        4548  2026-05-31  archive/Jan27version_submit_mpas_gocart.bash
+        4233  2026-06-08  archive/submit_mpas_gocart.bash
+       10858  2026-11-04  submit_mpas_gocart.bash
+
+==== input/optics_files ====
+total: 3.9G
+files (to depth 3): 41
+        3072  2026-05-19  differences.txt
+       72180  2026-06-05  opticsBands_BC.v1_5.RRTMG.nc
+       72180  2026-06-05  opticsBands_BRC.v2_5.RRTMG.nc
+      177000  2026-06-05  opticsBands_DU.v15_5.RRTMG.nc
+      107120  2026-05-19  opticsBands_NI.v2_5.RRTMG.nc
+       72180  2026-06-05  opticsBands_OC.v1_5.RRTMG.nc
+      177000  2026-06-05  opticsBands_SS.v3_5.RRTMG.nc
+       72180  2026-06-05  opticsBands_SU.v2_5.RRTMG.nc
+   211171576  2026-06-05  optics_BC.v1_5.nc
+   211171576  2026-06-05  optics_BRC.v2_5.nc
+    73712788  2026-06-05  optics_DU.v15_5.nc
+       72180  2026-06-01  optics_new_files/opticsBands_BC.v1_3.RRTMG.nc
+       72180  2026-06-01  optics_new_files/opticsBands_BC.v1_5.RRTMG.nc
+       72180  2026-06-01  optics_new_files/opticsBands_BRC.v1_5.RRTMG.nc
+       72180  2026-06-01  optics_new_files/opticsBands_BRC.v2_5.RRTMG.nc
+      177000  2026-06-01  optics_new_files/opticsBands_DU.v15_3.RRTMG.nc
+      177000  2026-06-01  optics_new_files/opticsBands_DU.v15_5.RRTMG.nc
+      107120  2026-06-01  optics_new_files/opticsBands_NI.v2_5.RRTMG.nc
+       72180  2026-06-01  optics_new_files/opticsBands_OC.v1_3.RRTMG.nc
+       72180  2026-06-01  optics_new_files/opticsBands_OC.v1_5.RRTMG.nc
+      177000  2026-06-01  optics_new_files/opticsBands_SS.v3_3.RRTMG.nc
+      177000  2026-06-01  optics_new_files/opticsBands_SS.v3_5.RRTMG.nc
+       72180  2026-06-01  optics_new_files/opticsBands_SU.v1_3.RRTMG.nc
+       72180  2026-06-01  optics_new_files/opticsBands_SU.v2_5.RRTMG.nc
+    79410724  2026-06-01  optics_new_files/optics_BC.v1_3.nc
+   211171576  2026-06-01  optics_new_files/optics_BC.v1_5.nc
+   211171576  2026-06-01  optics_new_files/optics_BRC.v1_5.nc
+   211171576  2026-06-01  optics_new_files/optics_BRC.v2_5.nc
+    73711072  2026-06-01  optics_new_files/optics_DU.v15_3.nc
+    73712788  2026-06-01  optics_new_files/optics_DU.v15_5.nc
+   316755844  2026-06-01  optics_new_files/optics_NI.v2_5.nc
+    79410724  2026-06-01  optics_new_files/optics_OC.v1_3.nc
+   211171576  2026-06-01  optics_new_files/optics_OC.v1_5.nc
+   198875912  2026-06-01  optics_new_files/optics_SS.v3_3.nc
+   528277628  2026-06-01  optics_new_files/optics_SS.v3_5.nc
+    79410724  2026-06-01  optics_new_files/optics_SU.v1_3.nc
+   211171576  2026-06-01  optics_new_files/optics_SU.v2_5.nc
+   316755844  2026-05-19  optics_NI.v2_5.nc
+   211171576  2026-06-05  optics_OC.v1_5.nc
+   528277628  2026-06-05  optics_SS.v3_5.nc
+   211171576  2026-06-05  optics_SU.v2_5.nc
+
+==== input/BACKGROUND ====
+total: 1.3G
+files (to depth 3): 15
+     2504928  2025-06-30  BACKGROUND_dms.dat
+      507360  2025-06-30  BACKGROUND_ptrop.dat
+    57404600  2025-06-30  BACKGROUND_sulf_01.dat
+    57404600  2025-06-30  BACKGROUND_sulf_02.dat
+    57404600  2025-06-30  BACKGROUND_sulf_03.dat
+    57404600  2025-06-30  BACKGROUND_sulf_04.dat
+    57404600  2025-06-30  BACKGROUND_sulf_05.dat
+    57404600  2025-06-30  BACKGROUND_sulf_06.dat
+    57404600  2025-06-30  BACKGROUND_sulf_07.dat
+    57404600  2025-06-30  BACKGROUND_sulf_08.dat
+    57404600  2025-06-30  BACKGROUND_sulf_09.dat
+    57404600  2025-06-30  BACKGROUND_sulf_10.dat
+    57404600  2025-06-30  BACKGROUND_sulf_11.dat
+    57404600  2025-06-30  BACKGROUND_sulf_12.dat
+   688855200  2025-06-30  BACKGROUND_sulf.dat
+
+==== input/Example-1/BACKGROUND ====
+total: 1.3G
+files (to depth 3): 15
+     2504928  2025-06-30  BACKGROUND_dms.dat
+      507360  2025-06-30  BACKGROUND_ptrop.dat
+    57404600  2025-06-30  BACKGROUND_sulf_01.dat
+    57404600  2025-06-30  BACKGROUND_sulf_02.dat
+    57404600  2025-06-30  BACKGROUND_sulf_03.dat
+    57404600  2025-06-30  BACKGROUND_sulf_04.dat
+    57404600  2025-06-30  BACKGROUND_sulf_05.dat
+    57404600  2025-06-30  BACKGROUND_sulf_06.dat
+    57404600  2025-06-30  BACKGROUND_sulf_07.dat
+    57404600  2025-06-30  BACKGROUND_sulf_08.dat
+    57404600  2025-06-30  BACKGROUND_sulf_09.dat
+    57404600  2025-06-30  BACKGROUND_sulf_10.dat
+    57404600  2025-06-30  BACKGROUND_sulf_11.dat
+    57404600  2025-06-30  BACKGROUND_sulf_12.dat
+   688855200  2025-06-30  BACKGROUND_sulf.dat
+
+==== input/Example-1/GFS ====
+total: 4.6G
+files (to depth 3): 6
+   818178824  2025-12-23  GFS:2024-10-15_00
+   818178824  2025-12-23  GFS:2024-10-16_00
+   818178824  2025-12-23  GFS:2024-10-17_00
+   818178824  2025-12-23  GFS:2024-10-18_00
+   818178824  2025-12-23  GFS:2024-10-19_00
+   818178824  2026-01-06  GFS:2024-10-20_00
+
+==== input/Example-1/MERRA2 ====
+total: 11G
+files (to depth 3): 6
+  1918536656  2025-12-03  MERRA2:2024-10-15_00
+  1918536656  2025-12-03  MERRA2:2024-10-16_00
+  1918536656  2025-12-03  MERRA2:2024-10-17_00
+  1918536656  2025-12-03  MERRA2:2024-10-18_00
+  1918536656  2025-12-03  MERRA2:2024-10-19_00
+  1918536656  2026-01-06  MERRA2:2024-10-20_00
+
+==== input/Example-1/EMIS ====
+total: 16G
+files (to depth 3): 30
+   661299444  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_BC_x1.163842.MPAS.nc
+   661299448  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_BIGENE_x1.163842.MPAS.nc
+   661299444  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_CO_x1.163842.MPAS.nc
+   661299444  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_ISOP_x1.163842.MPAS.nc
+   661299444  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_NH3_x1.163842.MPAS.nc
+   661299448  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_NO2_x1.163842.MPAS.nc
+   661299444  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_OC_x1.163842.MPAS.nc
+   661299444  2026-01-05  archive/FINNv2.5.1_modvrs_nrt_MOZART_2024_fire_SO2_x1.163842.MPAS.nc
+    23594784  2026-02-26  archive/x1.163842-2024-anth_ammonia.MPAS.nc
+    86511008  2025-12-04  archive/x1.163842-2024-anth_black-carbon.MPAS.nc
+    86511008  2025-12-04  archive/x1.163842-2024-anth_carbon-monoxide.MPAS.nc
+    94375536  2025-12-04  archive/x1.163842-2024-anth_isoprene.MPAS.nc
+    78646480  2025-12-04  archive/x1.163842-2024-anth_monoterpenes.MPAS.nc
+   102240064  2025-12-04  archive/x1.163842-2024-anth_nitrogen-dioxide.MPAS.nc
+    86511008  2025-12-04  archive/x1.163842-2024-anth_organic-carbon.MPAS.nc
+    86511008  2025-12-04  archive/x1.163842-2024-anth_sulfur-dioxide.MPAS.nc
+ 10570505652  2026-03-31  FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc
+    94375536  2026-03-31  x1.163842-2024-anth_ammonia.MPAS.nc
+    23594784  2026-02-26  x1.163842-2024-anth_black-carbon.MPAS.nc
+    23594784  2026-02-26  x1.163842-2024-anth_carbon-monoxide.MPAS.nc
+    23594784  2026-02-26  x1.163842-2024-anth_isoprene.MPAS.nc
+    23594784  2026-02-26  x1.163842-2024-anth_monoterpenes.MPAS.nc
+    23594784  2026-02-26  x1.163842-2024-anth_nitrogen-dioxide.MPAS.nc
+    23594784  2026-02-26  x1.163842-2024-anth_organic-carbon.MPAS.nc
+    23594784  2026-02-26  x1.163842-2024-anth_sulfur-dioxide.MPAS.nc
+     7866272  2025-12-03  x1.163842-2024-biog_alpha-pinene.MPAS.nc
+     7866272  2025-12-03  x1.163842-2024-biog_beta-pinene.MPAS.nc
+     7866280  2025-12-03  x1.163842-2024-biog_carbon-monoxide.MPAS.nc
+     7866264  2025-12-03  x1.163842-2024-biog_isoprene.MPAS.nc
+     7866284  2025-12-03  x1.163842-2024-biog_other-monoterpenes.MPAS.nc
+
+==== input/Example-1/GRID ====
+total: 812M
+files (to depth 3): 18
+     9011229  2026-10-21  x1.163842.graph.info
+      641616  2026-10-21  x1.163842.graph.info.part.1024
+      354992  2026-10-21  x1.163842.graph.info.part.12
+      514573  2026-10-21  x1.163842.graph.info.part.128
+      389086  2026-10-21  x1.163842.graph.info.part.16
+      561470  2026-10-21  x1.163842.graph.info.part.192
+      423256  2026-10-21  x1.163842.graph.info.part.24
+      584999  2026-10-21  x1.163842.graph.info.part.256
+      440333  2026-10-21  x1.163842.graph.info.part.32
+      608461  2026-10-21  x1.163842.graph.info.part.384
+      457358  2026-10-21  x1.163842.graph.info.part.48
+      620173  2026-10-21  x1.163842.graph.info.part.512
+      465973  2026-10-21  x1.163842.graph.info.part.64
+      631887  2026-10-21  x1.163842.graph.info.part.768
+      474493  2026-10-21  x1.163842.graph.info.part.96
+   224139172  2026-10-21  x1.163842.grid.nc
+   315249696  2026-10-25  x1.163842.static_chems.nc
+   328730104  2026-10-21  x1.163842.static.nc
+
+==== input/MERRA2 ====
+total: 17K
+files (to depth 2): 1
+        4713  2026-06-02  download_merra.sh
+
+==== input/EMIS ====
+total: 38G
+files (to depth 3): 157
+   440878242  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_bc_v6.2_monthly_2023.nc
+   439458945  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_co_v6.2_monthly_2023.nc
+   415311049  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_isoprene_v6.2_monthly_2023.nc
+   298215115  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_monoterpenes_v6.2_monthly_2023.nc
+   658898084  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_nh3_v6.2_monthly_2023.nc
+   573254952  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_nox_v6.2_monthly_2023.nc
+   439675182  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_oc_v6.2_monthly_2023.nc
+   426154274  2026-10-20  CAMS_ANTH/CAMS-GLOB-ANT_Glb_0.1x0.1_anthro_so2_v6.2_monthly_2023.nc
+   653633292  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_ammonia_2004.nc
+   660338945  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_ammonia_2008.nc
+   663250412  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_ammonia_2012.nc
+   663176539  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_ammonia_2016.nc
+   664605016  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_ammonia_2019.nc
+   664755622  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_ammonia_2020.nc
+   664633783  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_ammonia_2024.nc
+   425440311  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_black-carbon_2004.nc
+   433090828  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_black-carbon_2008.nc
+   434728192  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_black-carbon_2012.nc
+   434134558  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_black-carbon_2016.nc
+   431291998  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_black-carbon_2019.nc
+   434604437  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_black-carbon_2020.nc
+   445347490  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_black-carbon_2024.nc
+   423684949  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_carbon-monoxide_2004.nc
+   431506889  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_carbon-monoxide_2008.nc
+   433170490  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_carbon-monoxide_2012.nc
+   432473141  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_carbon-monoxide_2016.nc
+   429563574  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_carbon-monoxide_2019.nc
+   433087928  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_carbon-monoxide_2020.nc
+   443938686  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_carbon-monoxide_2024.nc
+   399133261  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_isoprene_2004.nc
+   402063251  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_isoprene_2008.nc
+   409825513  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_isoprene_2012.nc
+   409624090  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_isoprene_2016.nc
+   405134277  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_isoprene_2019.nc
+   408748483  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_isoprene_2020.nc
+   419756361  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_isoprene_2024.nc
+   280416667  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_monoterpenes_2004.nc
+   282910720  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_monoterpenes_2008.nc
+   291269691  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_monoterpenes_2012.nc
+   291361981  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_monoterpenes_2016.nc
+   286752528  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_monoterpenes_2019.nc
+   290050788  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_monoterpenes_2020.nc
+   301365652  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_monoterpenes_2024.nc
+   559089064  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_nitrogen-oxides_2004.nc
+   566549595  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_nitrogen-oxides_2008.nc
+   567693803  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_nitrogen-oxides_2012.nc
+   566935883  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_nitrogen-oxides_2016.nc
+   564501631  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_nitrogen-oxides_2019.nc
+   567757215  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_nitrogen-oxides_2020.nc
+   578454854  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_nitrogen-oxides_2024.nc
+   423700973  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_organic-carbon_2004.nc
+   431816942  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_organic-carbon_2008.nc
+   433417149  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_organic-carbon_2012.nc
+   432698594  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_organic-carbon_2016.nc
+   430000530  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_organic-carbon_2019.nc
+   433268429  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_organic-carbon_2020.nc
+   444089968  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_organic-carbon_2024.nc
+   412248060  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_sulphur-dioxide_2004.nc
+   418049356  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_sulphur-dioxide_2008.nc
+   420619874  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_sulphur-dioxide_2012.nc
+   420087271  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_sulphur-dioxide_2016.nc
+   416250840  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_sulphur-dioxide_2019.nc
+   419059704  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_sulphur-dioxide_2020.nc
+   430243314  2026-04-13  CAMS_ANTH/CAMS-GLOB-ANT_v6.2_sulphur-dioxide_2024.nc
+   210040080  2026-01-15  CAMS_BIOG/CAMS-GLOB-BIO_v3.1_alpha-pinene_2019.nc
+   210546214  2026-01-15  CAMS_BIOG/CAMS-GLOB-BIO_v3.1_beta-pinene_2019.nc
+   221806380  2026-01-15  CAMS_BIOG/CAMS-GLOB-BIO_v3.1_carbon-monoxide_2019.nc
+   214525222  2026-01-15  CAMS_BIOG/CAMS-GLOB-BIO_v3.1_isoprene_2019.nc
+   210519354  2026-01-15  CAMS_BIOG/CAMS-GLOB-BIO_v3.1_other-monoterpenes_2019.nc
+  6921809578  2026-07-02  FINN25/2012/FINNv2.5_mod_MOZART_2012_c20211213.txt
+    31881720  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20240623.txt
+    48330818  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241001.txt
+    44543320  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241002.txt
+    35486400  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241003.txt
+    33910806  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241004.txt
+    36925042  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241005.txt
+    35256424  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241006.txt
+    39010976  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241007.txt
+    43731298  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241008.txt
+    43949646  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241009.txt
+    39483848  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241010.txt
+    36229300  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241011.txt
+    40523262  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241012.txt
+    36035500  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241013.txt
+    32983150  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241014.txt
+    28286084  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241015.txt
+    24851302  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241016.txt
+    23577390  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241017.txt
+    23134234  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241018.txt
+    23680750  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241019.txt
+    24313184  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241020.txt
+    25879088  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241021.txt
+    30726026  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241022.txt
+    32446324  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241023.txt
+    33706024  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241024.txt
+    36025810  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241025.txt
+    32114280  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241026.txt
+    30164652  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241027.txt
+    32179526  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241028.txt
+    35180196  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241029.txt
+    31997354  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241030.txt
+    25018616  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241031.txt
+    26424958  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241101.txt
+    28629756  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241102.txt
+    20590932  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241103.txt
+    31787404  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241110.txt
+    28955340  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241111.txt
+    27632978  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241112.txt
+    32117510  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241113.txt
+    29576792  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241114.txt
+    29145910  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241115.txt
+    26523150  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241116.txt
+    25793816  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241117.txt
+    27520574  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241118.txt
+    29148494  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241119.txt
+    29339710  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241120.txt
+    28757664  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241121.txt
+    27479876  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241122.txt
+    28276394  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241123.txt
+    29776406  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241124.txt
+    30126538  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241125.txt
+    30481192  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241126.txt
+    31173058  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241127.txt
+    30725380  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241128.txt
+    32449554  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241129.txt
+    32448262  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241130.txt
+    29187254  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241201.txt
+    31493474  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241202.txt
+    30331966  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241203.txt
+    32086502  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241204.txt
+    31647222  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241205.txt
+    27214370  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241206.txt
+    27328066  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241207.txt
+    31162722  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241208.txt
+    35350094  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241209.txt
+    38399214  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241210.txt
+    31339726  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241211.txt
+    33040644  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241212.txt
+    31524482  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241213.txt
+    38473504  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241214.txt
+    38648570  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241215.txt
+    34027732  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241216.txt
+    37200884  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241217.txt
+    39143406  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241218.txt
+    37601404  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241219.txt
+    36983828  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241220.txt
+    39915376  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241221.txt
+    36651138  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241222.txt
+    35921804  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241223.txt
+    35361722  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241224.txt
+    28309986  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241225.txt
+    33454084  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241226.txt
+    35897902  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241227.txt
+    41682832  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241228.txt
+    40443158  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241229.txt
+    46490364  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241230.txt
+    54706192  2026-06-03  FINN2nrt/2024/FINNv2.5.1_modvrs_nrt_MOZART_20241231.txt
+
+==== loose files directly under input/ ====
+        3072  2026-06-16  difference.txt
+           0  2026-06-16  dump1.txt
+      109112  2026-05-18  Gridinfo_CAMS-GLOB-ANT_c20240709.nc
+       44288  2026-04-17  Gridinfo_CAMS-GLOB-BIOG_c20260116.nc
+    20317128  2026-04-06  mpas_scrip.163842.nc
+      514573  2026-06-01  x1.163842.graph.info.part.128
+      465973  2026-06-04  x1.163842.graph.info.part.64
+   224139172  2026-06-05  x1.163842.grid.nc
+   315249696  2026-06-01  x1.163842.static_chems.nc
+   328730104  2026-05-01  x1.163842.static.nc
+
+==== anything for the 120-km mesh (name contains 40962) ====
+none
+
+==== meshes with products (distinct x<N>.<cells> prefixes) ====
+     44 x1.163842
+
+==== regridding support files (SCRIP, ESMF weights, grid info) ====
+      109112  2026-05-18  input/Gridinfo_CAMS-GLOB-ANT_c20240709.nc
+       44288  2026-04-17  input/Gridinfo_CAMS-GLOB-BIOG_c20260116.nc
+    20317128  2026-04-06  input/mpas_scrip.163842.nc
+
+==== brown-carbon RRTMG optics table ====
+       72180  2026-06-05  input/optics_files/opticsBands_BRC.v2_5.RRTMG.nc
+       72180  2026-06-01  input/optics_files/optics_new_files/opticsBands_BRC.v1_5.RRTMG.nc
+       72180  2026-06-01  input/optics_files/optics_new_files/opticsBands_BRC.v2_5.RRTMG.nc
+
+==== NetCDF format of sample files (the model reads classic, 64-bit offset, or cdf5 only) ====
+ncdump not on PATH (try: module load netcdf); skipped
+
+==== TEXT input/namelist_files/archive/namelist.atmosphere.sh ====
+# Namelist buleprint for MPAS namelist.atmosphere
+export namelist_atmosphere="
+&nhyd_model
+    config_time_integration_order = 2
+    config_dt = 360.0
+    config_start_time = '${start_year}-${start_month}-${start_day}_${start_hour}:00:00'
+    config_run_duration = '${fcst_len}_${fcst_hr}:00:00'
+    config_split_dynamics_transport = true
+    config_number_of_sub_steps = 4
+    config_dynamics_split_steps = 3
+    config_horiz_mixing = '2d_smagorinsky'
+    config_len_disp = 60000.0
+    config_visc4_2dsmag = 0.05
+    config_scalar_advection = true
+    config_monotonic = true
+    config_coef_3rd_order = 0.25
+    config_epssm = 0.1
+    config_smdiv = 0.1
+    config_positive_definite = false
+/
+&damping
+    config_zd = 22000.0
+    config_xnutr = 0.2
+/
+&limited_area
+    config_apply_lbcs = false
+/
+&io
+    config_pio_num_iotasks = 0
+    config_pio_stride = 32
+/
+&decomposition
+    config_block_decomp_file_prefix = 'x1.163842.graph.info.part.'
+/
+&restart
+    config_do_restart = false 
+    config_do_DAcycling = false
+/
+&printout
+    config_print_global_minmax_vel = true
+    config_print_detailed_minmax_vel = true
+/
+&IAU
+    config_IAU_option = 'off'
+    config_IAU_window_length_s = 21600.
+/
+&assimilation
+    config_jedi_da = true
+/
+&physics
+    config_sst_update          = false
+    config_sstdiurn_update     = false
+    config_deepsoiltemp_update = false
+    config_radtlw_interval     = '00:30:00'
+    config_radtsw_interval     = '00:30:00'
+    config_o3climatology       = true
+    config_bucket_update       = 'none'
+    config_physics_suite       = 'MPAS-GOCART2G'
+    config_microp_scheme       = 'mp_thompson_gocart2G'
+    config_convection_scheme   = 'cu_ntiedtke'
+    config_pbl_scheme          = 'bl_mynn'
+    config_gwdo_scheme         = 'bl_ysu_gwdo'
+    config_radt_cld_scheme     = 'cld_fraction'
+    config_radt_lw_scheme      = 'rrtmg_lw'
+    config_radt_sw_scheme      = 'rrtmg_sw'
+    config_sfclayer_scheme     = 'sf_mynn'
+    config_lsm_scheme          = 'sf_noah'
+    config_mynn_mixchems = true
+    config_ntiedtke_ctrchems = true
+    config_ntiedtke_scavchems = true
+/
+
+&soundings
+    config_sounding_interval = 'none'
+/
+&chemistry
+    config_gocart2G_do_CA2Gbc       = true
+    config_gocart2G_do_CA2Gbr       = true
+    config_gocart2G_do_CA2Goc       = true
+    config_gocart2G_do_SOA2G        = true
+    config_gocart2G_do_DU2G         = true
+    config_gocart2G_do_NI2G         = true
+    config_gocart2G_do_SS2G         = true
+    config_gocart2G_do_SU2G         = true
+    config_gocart2G_toRRTMG = true
+    config_gocart2G_toMYNN  = true
+    config_gocart2G_toTHOM = true
+    config_gocart2G_toNTIEDTKE = true
+    config_gocart2G_biobemis_interval = '00_01:00:00'
+    config_gocart2G_hno3_tau = 86400.0
+    config_gocart2G_opticsBC = 'optics_BC.v1_5.nc'
+    config_gocart2G_opticsBC_RRTMG = 'opticsBands_BC.v1_5.RRTMG.nc'
+    config_gocart2G_opticsOC = 'optics_OC.v1_5.nc'
+    config_gocart2G_opticsOC_RRTMG = 'opticsBands_OC.v1_5.RRTMG.nc'
+    config_gocart2G_opticsBR = 'optics_BRC.v2_5.nc'
+    config_gocart2G_opticsBR_RRTMG = 'opticsBands_BRC.v2_5.RRTMG.nc'
+    config_gocart2G_opticsDU = 'optics_DU.v15_5.nc'
+    config_gocart2G_opticsDU_RRTMG = 'opticsBands_DU.v15_5.RRTMG.nc'
+    config_gocart2G_opticsSS = 'optics_SS.v3_5.nc'
+    config_gocart2G_opticsSS_RRTMG = 'opticsBands_SS.v3_5.RRTMG.nc'
+    config_gocart2G_opticsSU = 'optics_SU.v2_5.nc'
+    config_gocart2G_opticsSU_RRTMG = 'opticsBands_SU.v2_5.RRTMG.nc'
+    config_gocart2G_opticsNI = 'optics_NI.v2_5.nc'
+    config_gocart2G_opticsNI_RRTMG = 'opticsBands_NI.v2_5.RRTMG.nc'
+/
+"
+
+==== TEXT input/namelist_files/archive/namelist.init_atmosphere.sh ====
+# Namelist blueprint for MPAS init_atmosphere
+export namelist_init_atmosphere="
+&nhyd_model
+    config_init_case = 7
+    config_start_time = '${start_year}-${start_month}-${start_day}_${start_hour}:00:00'
+    config_stop_time = '${end_year}-${end_month}-${end_day}_${end_hour}:00:00'
+    config_theta_adv_order = 3
+    config_coef_3rd_order = 0.25
+    config_interface_projection = 'linear_interpolation'
+/
+&dimensions
+    config_nvertlevels = 55
+    config_nsoillevels = 4
+    config_nfglevels = 38
+    config_nfgsoillevels = 4
+    config_gocartlevels = 30
+/
+&data_sources
+    config_geog_data_path = '/glade/work/wrfhelp/WPS_GEOG/'
+    config_met_prefix = 'GFS'
+    config_sfc_prefix = 'GFS'
+    config_fg_interval = 86400
+    config_landuse_data = 'MODIFIED_IGBP_MODIS_NOAH'
+    config_soilcat_data = 'STATSGO'
+    config_topo_data = 'GMTED2010'
+    config_vegfrac_data = 'MODIS'
+    config_albedo_data = 'MODIS'
+    config_maxsnowalbedo_data = 'MODIS'
+    config_supersample_factor = 3
+    config_lu_supersample_factor = 1
+    config_30s_supersample_factor = 1
+    config_use_spechumd = false
+/
+&vertical_grid
+    config_ztop = 30000.0
+    config_nsmterrain = 1
+    config_smooth_surfaces = true
+    config_dzmin = 0.3
+    config_nsm = 30
+    config_tc_vertical_grid = true
+    config_blend_bdy_terrain = false
+/
+&interpolation_control
+    config_extrap_airtemp = 'linear'
+/
+&preproc_stages
+    config_static_interp = false
+    config_native_gwd_static = false
+    config_native_gwd_gsl_static = false
+    config_vertical_grid = true
+    config_met_interp = true
+    config_input_sst = false
+    config_frac_seaice = true
+/
+&io
+    config_pio_num_iotasks = 0
+    config_pio_stride = 1
+/
+&decomposition
+    config_block_decomp_file_prefix = 'x1.163842.graph.info.part.'
+/
+&preproc_chemistry
+    config_aerosolFG_prefix = 'MERRA2'
+    config_aerosolFG_levels = 72
+    config_chems_bck_levels = 55
+    config_gocart2G_ANTHemis = true
+    config_gocart2G_BIOBemis = true
+    config_gocart2G_BIOGemis = true
+    config_gocart2G_interp = true
+    config_gocart2G_clim = true
+    config_gocart2G_static = false
+/
+"
+
+==== TEXT input/namelist_files/namelist.chem.atmosphere.sh ====
+# Namelist buleprint for MPAS namelist.atmosphere
+export namelist_atmosphere="
+&nhyd_model
+    config_time_integration_order = 2
+    config_dt = 360.0
+    config_start_time = '${start_year}-${start_month}-${start_day}_${start_hour}:00:00'
+    config_run_duration = '${fcst_len}_${fcst_hr}:00:00'
+    config_split_dynamics_transport = true
+    config_number_of_sub_steps = 4
+    config_dynamics_split_steps = 3
+    config_horiz_mixing = '2d_smagorinsky'
+    config_len_disp = 60000.0
+    config_visc4_2dsmag = 0.05
+    config_scalar_advection = true
+    config_monotonic = true
+    config_coef_3rd_order = 0.25
+    config_epssm = 0.1
+    config_smdiv = 0.1
+    config_positive_definite = false
+/
+&damping
+    config_zd = 22000.0
+    config_xnutr = 0.2
+/
+&limited_area
+    config_apply_lbcs = false
+/
+&io
+    config_pio_num_iotasks = 0
+    config_pio_stride = 32
+/
+&decomposition
+    config_block_decomp_file_prefix = '${grid_name}.graph.info.part.'
+/
+&restart
+    config_do_restart = false 
+    config_do_DAcycling = false
+/
+&printout
+    config_print_global_minmax_vel = true
+    config_print_detailed_minmax_vel = true
+/
+&IAU
+    config_IAU_option = 'off'
+    config_IAU_window_length_s = 21600.
+/
+&assimilation
+    config_jedi_da = true
+/
+&physics
+    config_sst_update          = false
+    config_sstdiurn_update     = false
+    config_deepsoiltemp_update = false
+    config_radtlw_interval     = '00:30:00'
+    config_radtsw_interval     = '00:30:00'
+    config_o3climatology       = true
+    config_bucket_update       = 'none'
+    config_physics_suite       = 'MPAS-GOCART2G'
+    config_microp_scheme       = 'mp_thompson_gocart2G'
+    config_convection_scheme   = 'cu_ntiedtke'
+    config_pbl_scheme          = 'bl_mynn'
+    config_gwdo_scheme         = 'bl_ysu_gwdo'
+    config_radt_cld_scheme     = 'cld_fraction'
+    config_radt_lw_scheme      = 'rrtmg_lw'
+    config_radt_sw_scheme      = 'rrtmg_sw'
+    config_sfclayer_scheme     = 'sf_mynn'
+    config_lsm_scheme          = 'sf_noah'
+    config_mynn_mixchems = true
+    config_ntiedtke_ctrchems = true
+    config_ntiedtke_scavchems = true
+/
+
+&soundings
+    config_sounding_interval = 'none'
+/
+&chemistry
+    config_gocart2G_do_CA2Gbc       = true
+    config_gocart2G_do_CA2Gbr       = true
+    config_gocart2G_do_CA2Goc       = true
+    config_gocart2G_do_SOA2G        = true
+    config_gocart2G_do_DU2G         = true
+    config_gocart2G_do_NI2G         = true
+    config_gocart2G_do_SS2G         = true
+    config_gocart2G_do_SU2G         = true
+    config_gocart2G_toRRTMG = true
+    config_gocart2G_toMYNN  = true
+    config_gocart2G_toTHOM = true
+    config_gocart2G_toNTIEDTKE = true
+    config_gocart2G_biobemis_interval = '00_01:00:00'
+    config_gocart2G_hno3_tau = 86400.0
+    config_gocart2G_opticsBC = 'optics_BC.v1_5.nc'
+    config_gocart2G_opticsBC_RRTMG = 'opticsBands_BC.v1_5.RRTMG.nc'
+    config_gocart2G_opticsOC = 'optics_OC.v1_5.nc'
+    config_gocart2G_opticsOC_RRTMG = 'opticsBands_OC.v1_5.RRTMG.nc'
+    config_gocart2G_opticsBR = 'optics_BRC.v2_5.nc'
+    config_gocart2G_opticsBR_RRTMG = 'opticsBands_BRC.v2_5.RRTMG.nc'
+    config_gocart2G_opticsDU = 'optics_DU.v15_5.nc'
+    config_gocart2G_opticsDU_RRTMG = 'opticsBands_DU.v15_5.RRTMG.nc'
+    config_gocart2G_opticsSS = 'optics_SS.v3_5.nc'
+    config_gocart2G_opticsSS_RRTMG = 'opticsBands_SS.v3_5.RRTMG.nc'
+    config_gocart2G_opticsSU = 'optics_SU.v2_5.nc'
+    config_gocart2G_opticsSU_RRTMG = 'opticsBands_SU.v2_5.RRTMG.nc'
+    config_gocart2G_opticsNI = 'optics_NI.v2_5.nc'
+    config_gocart2G_opticsNI_RRTMG = 'opticsBands_NI.v2_5.RRTMG.nc'
+/
+"
+
+==== TEXT input/namelist_files/namelist.chem.init_atmosphere.sh ====
+# Namelist blueprint for MPAS init_atmosphere
+export namelist_init_atmosphere="
+&nhyd_model
+    config_init_case = 7
+    config_start_time = '${start_year}-${start_month}-${start_day}_${start_hour}:00:00'
+    config_stop_time = '${end_year}-${end_month}-${end_day}_${end_hour}:00:00'
+    config_theta_adv_order = 3
+    config_coef_3rd_order = 0.25
+    config_interface_projection = 'linear_interpolation'
+/
+&dimensions
+    config_nvertlevels = 55
+    config_nsoillevels = 4
+    config_nfglevels = 38
+    config_nfgsoillevels = 4
+    config_gocartlevels = 30
+/
+&data_sources
+    config_geog_data_path = '/glade/work/wrfhelp/WPS_GEOG/'
+    config_met_prefix = 'GFS'
+    config_sfc_prefix = 'GFS'
+    config_fg_interval = 86400
+    config_landuse_data = 'MODIFIED_IGBP_MODIS_NOAH'
+    config_soilcat_data = 'STATSGO'
+    config_topo_data = 'GMTED2010'
+    config_vegfrac_data = 'MODIS'
+    config_albedo_data = 'MODIS'
+    config_maxsnowalbedo_data = 'MODIS'
+    config_supersample_factor = 3
+    config_lu_supersample_factor = 1
+    config_30s_supersample_factor = 1
+    config_use_spechumd = false
+/
+&vertical_grid
+    config_ztop = 30000.0
+    config_nsmterrain = 1
+    config_smooth_surfaces = true
+    config_dzmin = 0.3
+    config_nsm = 30
+    config_tc_vertical_grid = true
+    config_blend_bdy_terrain = false
+/
+&interpolation_control
+    config_extrap_airtemp = 'linear'
+/
+&preproc_stages
+    config_static_interp = false
+    config_native_gwd_static = false
+    config_native_gwd_gsl_static = false
+    config_vertical_grid = true
+    config_met_interp = true
+    config_input_sst = false
+    config_frac_seaice = true
+/
+&io
+    config_pio_num_iotasks = 0
+    config_pio_stride = 1
+/
+&decomposition
+    config_block_decomp_file_prefix = '${grid_name}.graph.info.part.'
+/
+&preproc_chemistry
+    config_aerosolFG_prefix = 'MERRA2'
+    config_aerosolFG_levels = 72
+    config_chems_bck_levels = 55
+    config_gocart2G_ANTHemis = true
+    config_gocart2G_BIOBemis = true
+    config_gocart2G_BIOGemis = true
+    config_gocart2G_interp = true
+    config_gocart2G_clim = true
+    config_gocart2G_static = true
+/
+"
+
+==== TEXT input/namelist_files/namelist.nudging.atmosphere.sh ====
+# Namelist buleprint for MPAS namelist.atmosphere
+export namelist_atmosphere="
+&nhyd_model
+    config_time_integration_order = 2
+    config_dt = 360.0
+    config_start_time = '${start_year}-${start_month}-${start_day}_${start_hour}:00:00'
+    config_run_duration = '${fcst_len}_${fcst_hr}:00:00'
+    config_split_dynamics_transport = true
+    config_number_of_sub_steps = 4
+    config_dynamics_split_steps = 3
+    config_horiz_mixing = '2d_smagorinsky'
+    config_len_disp = 60000.0
+    config_visc4_2dsmag = 0.05
+    config_scalar_advection = true
+    config_monotonic = true
+    config_coef_3rd_order = 0.25
+    config_epssm = 0.1
+    config_smdiv = 0.1
+    config_positive_definite = false
+/
+&damping
+    config_zd = 22000.0
+    config_xnutr = 0.2
+/
+&limited_area
+    config_apply_lbcs = false
+/
+&io
+    config_pio_num_iotasks = 0
+    config_pio_stride = 32
+/
+&decomposition
+    config_block_decomp_file_prefix = '${grid_name}.graph.info.part.'
+/
+&restart
+    config_do_restart = false 
+    config_do_DAcycling = false
+/
+&printout
+    config_print_global_minmax_vel = true
+    config_print_detailed_minmax_vel = true
+/
+&IAU
+    config_IAU_option = 'off'
+    config_IAU_window_length_s = 21600.
+/
+&assimilation
+    config_jedi_da = true
+/
+&physics
+    config_sst_update          = false
+    config_sstdiurn_update     = false
+    config_deepsoiltemp_update = false
+    config_radtlw_interval     = '00:30:00'
+    config_radtsw_interval     = '00:30:00'
+    config_o3climatology       = true
+    config_bucket_update       = 'none'
+    config_physics_suite       = 'MPAS-GOCART2G'
+    config_microp_scheme       = 'mp_thompson_gocart2G'
+    config_convection_scheme   = 'cu_ntiedtke'
+    config_pbl_scheme          = 'bl_mynn'
+    config_gwdo_scheme         = 'bl_ysu_gwdo'
+    config_radt_cld_scheme     = 'cld_fraction'
+    config_radt_lw_scheme      = 'rrtmg_lw'
+    config_radt_sw_scheme      = 'rrtmg_sw'
+    config_sfclayer_scheme     = 'sf_mynn'
+    config_lsm_scheme          = 'sf_noah'
+    config_mynn_mixchems = true
+    config_ntiedtke_ctrchems = true
+    config_ntiedtke_scavchems = true
+/
+
+&soundings
+    config_sounding_interval = 'none'
+/
+&chemistry
+    config_gocart2G_do_CA2Gbc       = true
+    config_gocart2G_do_CA2Gbr       = true
+    config_gocart2G_do_CA2Goc       = true
+    config_gocart2G_do_SOA2G        = true
+    config_gocart2G_do_DU2G         = true
+    config_gocart2G_do_NI2G         = true
+    config_gocart2G_do_SS2G         = true
+    config_gocart2G_do_SU2G         = true
+    config_gocart2G_toRRTMG = true
+    config_gocart2G_toMYNN  = true
+    config_gocart2G_toTHOM = true
+    config_gocart2G_toNTIEDTKE = true
+    config_gocart2G_biobemis_interval = '00_01:00:00'
+    config_gocart2G_hno3_tau = 86400.0
+    config_gocart2G_opticsBC = 'optics_BC.v1_5.nc'
+    config_gocart2G_opticsBC_RRTMG = 'opticsBands_BC.v1_5.RRTMG.nc'
+    config_gocart2G_opticsOC = 'optics_OC.v1_5.nc'
+    config_gocart2G_opticsOC_RRTMG = 'opticsBands_OC.v1_5.RRTMG.nc'
+    config_gocart2G_opticsBR = 'optics_BRC.v2_5.nc'
+    config_gocart2G_opticsBR_RRTMG = 'opticsBands_BRC.v2_5.RRTMG.nc'
+    config_gocart2G_opticsDU = 'optics_DU.v15_5.nc'
+    config_gocart2G_opticsDU_RRTMG = 'opticsBands_DU.v15_5.RRTMG.nc'
+    config_gocart2G_opticsSS = 'optics_SS.v3_5.nc'
+    config_gocart2G_opticsSS_RRTMG = 'opticsBands_SS.v3_5.RRTMG.nc'
+    config_gocart2G_opticsSU = 'optics_SU.v2_5.nc'
+    config_gocart2G_opticsSU_RRTMG = 'opticsBands_SU.v2_5.RRTMG.nc'
+    config_gocart2G_opticsNI = 'optics_NI.v2_5.nc'
+    config_gocart2G_opticsNI_RRTMG = 'opticsBands_NI.v2_5.RRTMG.nc'
+/
+&nudging
+    config_fdda_scheme       = 'analysis'
+    config_fdda_int          = 21600.
+    config_fdda_t            = true
+    config_fdda_t_coef       = 3.0e-4
+    config_fdda_t_in_pbl     = false
+    config_fdda_t_min_layer  = 0
+    config_fdda_q            = true
+    config_fdda_q_coef       = 3.0e-4
+    config_fdda_q_in_pbl     = false
+    config_fdda_q_min_layer  = 0
+    config_fdda_uv           = true
+    config_fdda_uv_coef      = 3.0e-4
+    config_fdda_uv_in_pbl    = false
+    config_fdda_uv_min_layer = 0
+/
+
+"
+
+==== TEXT input/namelist_files/namelist.nudging.init_atmosphere.sh ====
+# Namelist blueprint for MPAS init_atmosphere
+export namelist_init_atmosphere="
+&nhyd_model
+    config_init_case = 11
+    config_start_time = '${start_year}-${start_month}-${start_day}_${start_hour}:00:00'
+    config_stop_time = '${end_year}-${end_month}-${end_day}_${end_hour}:00:00'
+    config_theta_adv_order = 3
+    config_coef_3rd_order = 0.25
+    config_interface_projection = 'linear_interpolation'
+/
+&dimensions
+    config_nvertlevels = 55
+    config_nsoillevels = 4
+    config_nfglevels = 38
+    config_nfgsoillevels = 4
+    config_gocartlevels = 30
+/
+&data_sources
+    config_geog_data_path = '/glade/work/wrfhelp/WPS_GEOG/'
+    config_met_prefix = 'GFS'
+    config_sfc_prefix = 'GFS'
+    config_fg_interval = 86400
+    config_landuse_data = 'MODIFIED_IGBP_MODIS_NOAH'
+    config_soilcat_data = 'STATSGO'
+    config_topo_data = 'GMTED2010'
+    config_vegfrac_data = 'MODIS'
+    config_albedo_data = 'MODIS'
+    config_maxsnowalbedo_data = 'MODIS'
+    config_supersample_factor = 3
+    config_lu_supersample_factor = 1
+    config_30s_supersample_factor = 1
+    config_use_spechumd = false
+/
+&vertical_grid
+    config_ztop = 30000.0
+    config_nsmterrain = 1
+    config_smooth_surfaces = true
+    config_dzmin = 0.3
+    config_nsm = 30
+    config_tc_vertical_grid = true
+    config_blend_bdy_terrain = false
+/
+&interpolation_control
+    config_extrap_airtemp = 'linear'
+/
+&preproc_stages
+    config_static_interp = false
+    config_native_gwd_static = false
+    config_native_gwd_gsl_static = false
+    config_vertical_grid = true
+    config_met_interp = true
+    config_input_sst = false
+    config_frac_seaice = true
+/
+&io
+    config_pio_num_iotasks = 0
+    config_pio_stride = 1
+/
+&decomposition
+    config_block_decomp_file_prefix = '${grid_name}.graph.info.part.'
+/
+&preproc_chemistry
+    config_aerosolFG_prefix = 'MERRA2'
+    config_aerosolFG_levels = 72
+    config_chems_bck_levels = 55
+    config_gocart2G_ANTHemis = true
+    config_gocart2G_BIOBemis = true
+    config_gocart2G_BIOGemis = true
+    config_gocart2G_interp = true
+    config_gocart2G_clim = true
+    config_gocart2G_static = true
+/
+"
+
+==== TEXT input/namelist_files/namelist.static.init_atmosphere.sh ====
+# Namelist blueprint for MPAS init_atmosphere
+export namelist_init_atmosphere="
+&nhyd_model
+    config_init_case = 7
+    config_start_time = '${start_year}-${start_month}-${start_day}_${start_hour}:00:00'
+    config_stop_time = '${end_year}-${end_month}-${end_day}_${end_hour}:00:00'
+    config_theta_adv_order = 3
+    config_coef_3rd_order = 0.25
+    config_interface_projection = 'linear_interpolation'
+/
+&dimensions
+    config_nvertlevels = 55
+    config_nsoillevels = 4
+    config_nfglevels = 38
+    config_nfgsoillevels = 4
+    config_gocartlevels = 30
+/
+&data_sources
+    config_geog_data_path = '/glade/work/wrfhelp/WPS_GEOG/'
+    config_met_prefix = 'GFS'
+    config_sfc_prefix = 'GFS'
+    config_fg_interval = 86400
+    config_landuse_data = 'MODIFIED_IGBP_MODIS_NOAH'
+    config_soilcat_data = 'STATSGO'
+    config_topo_data = 'GMTED2010'
+    config_vegfrac_data = 'MODIS'
+    config_albedo_data = 'MODIS'
+    config_maxsnowalbedo_data = 'MODIS'
+    config_supersample_factor = 3
+    config_lu_supersample_factor = 1
+    config_30s_supersample_factor = 1
+    config_use_spechumd = false
+/
+&vertical_grid
+    config_ztop = 30000.0
+    config_nsmterrain = 1
+    config_smooth_surfaces = true
+    config_dzmin = 0.3
+    config_nsm = 30
+    config_tc_vertical_grid = true
+    config_blend_bdy_terrain = false
+/
+&interpolation_control
+    config_extrap_airtemp = 'linear'
+/
+&preproc_stages
+    config_static_interp = true
+    config_native_gwd_static = true
+    config_native_gwd_gsl_static = false
+    config_vertical_grid = false
+    config_met_interp = false
+    config_input_sst = false
+    config_frac_seaice = true
+/
+&io
+    config_pio_num_iotasks = 0
+    config_pio_stride = 1
+/
+&decomposition
+    config_block_decomp_file_prefix = '${grid_name}.graph.info.part.'
+/
+&preproc_chemistry
+    config_gocart2G_static = true
+/
+"
+
+==== TEXT input/stream_files/archive/stream_list.output ====
+xtime
+pressure
+exner
+rho
+theta
+scalars
+uReconstructZonal
+uReconstructMeridional
+w
+rainprod
+evapprod
+re_cloud
+re_ice
+re_snow
+cldfrac
+qc_cu
+qi_cu
+
+
+==== TEXT input/stream_files/archive/streams.atmosphere ====
+<streams>
+
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="init_chems_emissions.nc"
+                  input_interval="initial_only"/>
+
+<immutable_stream name="restart"
+                  type="input;output"
+                  io_type="pnetcdf,cdf5"
+                  filename_template="163842.restart.$Y-$M-$D_$h.$m.$s.nc"
+                  input_interval="initial_only"
+                  output_interval="00_12:00:00"/>
+
+<stream name="output"
+        type="output"
+        io_type="pnetcdf,cdf5"
+        filename_template="163842.output.$Y-$M-$D_$h.$m.$s.nc"
+        output_interval="00_01:00:00">
+        <file name="stream_list.output"/>
+</stream>
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mntb_biog_megan"/>
+</stream>
+
+</streams>
+
+==== TEXT input/stream_files/archive/streams.init_atmosphere ====
+<streams>
+
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="x1.163842.static_chems.nc"
+                  input_interval="initial_only" />
+
+<immutable_stream name="output"
+                  type="output"
+                  precision="single"
+                  io_type="cdf5"
+                  clobber_mode="overwrite"
+                  filename_template="init_chems_emissions.nc"
+                  packages="initial_conds"
+                  output_interval="initial_only" />
+
+<immutable_stream name="surface"
+                  type="output"
+                  clobber_mode="overwrite"
+                  filename_template="output.nc"
+                  filename_interval="none"
+                  packages="sfc_update"
+                  output_interval="86400" />
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="x1.163842-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024_x1.163842.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="x1.163842-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mntb_biog_megan"/>
+</stream>
+
+</streams>
+
+==== TEXT input/stream_files/stream_list.atmosphere.diagnostics ====
+initial_time
+xtime
+rainc
+rainnc
+precipw
+u10
+v10
+q2
+t2m
+th2m
+mslp
+relhum_200hPa
+dewpoint_200hPa
+temperature_200hPa
+height_200hPa
+temperature_surface
+dewpoint_surface
+cldfrac_low_UPP
+cldfrac_mid_UPP
+cldfrac_high_UPP
+cldfrac_tot_UPP
+totPM
+totPM25
+totEXTTAU
+totSTEXTTAU
+totSCATAU
+totSTSCATAU
+totANGSTR
+bcEXTTAU
+ocEXTTAU
+duEXTTAU
+ssEXTTAU
+suEXTTAU
+brEXTTAU
+niEXTTAU
+bcDP_phobic
+bcDP_philic
+bcWT_phobic
+bcWT_philic
+bcSV_phobic
+bcSV_philic
+bcSD_phobic
+bcSD_philic
+bcSMASS
+bcCMASS
+bcEMAN
+bcEMBB
+bcEMBF
+bcEMBG
+brDP_phobic
+brDP_philic
+brWT_phobic
+brWT_philic
+brSV_phobic
+brSV_philic
+brSD_phobic
+brSD_philic
+brSMASS
+brCMASS
+brEMAN
+brEMBB
+brEMBF
+brEMBG
+ocDP_phobic
+ocDP_philic
+ocWT_phobic
+ocWT_philic
+ocSV_phobic
+ocSV_philic
+ocSD_phobic
+ocSD_philic
+ocSMASS
+ocCMASS
+ocEMAN
+ocEMBB
+ocEMBF
+ocEMBG
+duDP_bin1
+duDP_bin2
+duDP_bin3
+duDP_bin4
+duDP_bin5
+duWT_bin1
+duWT_bin2
+duWT_bin3
+duWT_bin4
+duWT_bin5
+duSV_bin1
+duSV_bin2
+duSV_bin3
+duSV_bin4
+duSV_bin5
+duSD_bin1
+duSD_bin2
+duSD_bin3
+duSD_bin4
+duSD_bin5
+duSMASS
+duCMASS
+duEM_bin1
+duEM_bin2
+duEM_bin3
+duEM_bin4
+duEM_bin5
+niDP_bin1
+niDP_bin2
+niDP_bin3
+niWT_bin1
+niWT_bin2
+niWT_bin3
+niSV_bin1
+niSV_bin2
+niSV_bin3
+niSD_bin1
+niSD_bin2
+niSD_bin3
+nh4DP
+nh4WT
+nh4SV
+nh4SD
+nh3DP
+nh3WT
+nh3SV
+niSMASS
+niCMASS
+nh3SMASS
+nh3CMASS
+nh4SMASS
+nh4CMASS
+hno3SMASS
+hno3CMASS
+nh3EM
+ssDP_bin1
+ssDP_bin2
+ssDP_bin3
+ssDP_bin4
+ssDP_bin5
+ssWT_bin1
+ssWT_bin2
+ssWT_bin3
+ssWT_bin4
+ssWT_bin5
+ssSV_bin1
+ssSV_bin2
+ssSV_bin3
+ssSV_bin4
+ssSV_bin5
+ssSD_bin1
+ssSD_bin2
+ssSD_bin3
+ssSD_bin4
+ssSD_bin5
+ssSMASS
+ssCMASS
+ssEM_bin1
+ssEM_bin2
+ssEM_bin3
+ssEM_bin4
+ssEM_bin5
+suDP_dms
+suDP_so2
+suDP_so4
+suDP_msa
+suWT_dms
+suWT_so2
+suWT_so4
+suWT_msa
+suSV_dms
+suSV_so2
+suSV_so4
+suSV_msa
+suSD_dms
+suSD_so2
+suSD_so4
+suSD_msa
+SO4smass
+SO4cmass
+SO2smass
+SO2cmass
+DMSsmass
+DMScmass
+MSAsmass
+MSAcmass
+SO4eman
+SO2eman
+SO2embb
+suEM_dms
+suEM_so2
+suEM_so4
+suEM_msa
+totEXTCOEF
+persistent_hno3
+ssEXTCOEFRH20
+ssEXTCOEFRH80
+
+==== TEXT input/stream_files/stream_list.atmosphere.output ====
+xtime
+pressure
+exner
+rho
+theta
+scalars
+uReconstructZonal
+uReconstructMeridional
+w
+rainprod
+evapprod
+re_cloud
+re_ice
+re_snow
+cldfrac
+qc_cu
+qi_cu
+
+
+==== TEXT input/stream_files/streams.chem.atmosphere ====
+<streams>
+
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="init_chems_emissions.nc"
+                  input_interval="initial_only"/>
+
+<immutable_stream name="restart"
+                  type="input;output"
+                  io_type="pnetcdf,cdf5"
+                  filename_template="__GRID_NAME__.restart.$Y-$M-$D_$h.$m.$s.nc"
+                  input_interval="initial_only"
+                  output_interval="00_12:00:00"/>
+
+<stream name="output"
+        type="output"
+        io_type="pnetcdf,cdf5"
+        filename_template="__GRID_NAME__.output.$Y-$M-$D_$h.$m.$s.nc"
+        output_interval="00_01:00:00">
+        <file name="stream_list.atmosphere.output"/>
+</stream>
+
+<stream name="diagnostics"
+        type="output"
+        io_type="pnetcdf,cdf5"
+        filename_template="__GRID_NAME__.diag.$Y-$M-$D_$h.$m.$s.nc"
+        output_interval="00_01:00:00">
+        <file name="stream_list.atmosphere.diagnostics"/>
+</stream>
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mntb_biog_megan"/>
+</stream>
+
+</streams>
+
+==== TEXT input/stream_files/streams.chem.init_atmosphere ====
+<streams>
+
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="__GRID_NAME__.static_chems.nc"
+                  input_interval="initial_only" />
+
+<immutable_stream name="output"
+                  type="output"
+                  precision="single"
+                  io_type="cdf5"
+                  clobber_mode="overwrite"
+                  filename_template="init_chems_emissions.nc"
+                  packages="initial_conds"
+                  output_interval="initial_only" />
+
+<immutable_stream name="surface"
+                  type="output"
+                  clobber_mode="overwrite"
+                  filename_template="output.nc"
+                  filename_interval="none"
+                  packages="sfc_update"
+                  output_interval="86400" />
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mntb_biog_megan"/>
+</stream>
+
+</streams>
+
+==== TEXT input/stream_files/streams.nudging.atmosphere ====
+<streams>
+
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="init_chems_emissions.nc"
+                  input_interval="initial_only"/>
+
+<immutable_stream name="restart"
+                  type="input;output"
+                  io_type="pnetcdf,cdf5"
+                  filename_template="__GRID_NAME__.restart.$Y-$M-$D_$h.$m.$s.nc"
+                  input_interval="initial_only"
+                  output_interval="00_12:00:00"/>
+
+<immutable_stream name="fdda"
+                  type="input"
+                  filename_template="__GRID_NAME__.fdda.$Y-$M-$D_$h.$m.$s.nc"
+                  input_interval="24:00:00" />
+
+<stream name="output"
+        type="output"
+        io_type="pnetcdf,cdf5"
+        filename_template="__GRID_NAME__.output.$Y-$M-$D_$h.$m.$s.nc"
+        output_interval="00_01:00:00">
+        <file name="stream_list.atmosphere.output"/>
+</stream>
+
+<stream name="diagnostics"
+        type="output"
+        io_type="pnetcdf,cdf5"
+        filename_template="__GRID_NAME__.diag.$Y-$M-$D_$h.$m.$s.nc"
+        output_interval="00_01:00:00">
+        <file name="stream_list.atmosphere.diagnostics"/>
+</stream>
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mntb_biog_megan"/>
+</stream>
+
+</streams>
+
+==== TEXT input/stream_files/streams.nudging.init_atmosphere ====
+<streams>
+
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="init_chems_emissions.nc"
+                  input_interval="initial_only" />
+
+<immutable_stream name="fdda"
+                  type="output"
+                  filename_template="__GRID_NAME__.fdda.$Y-$M-$D_$h.$m.$s.nc"
+                  output_interval="24:00:00" />
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mntb_biog_megan"/>
+</stream>
+
+</streams>
+
+==== TEXT input/stream_files/streams.static.init_atmosphere ====
+<streams>
+
+<immutable_stream name="input"
+                  type="input"
+                  filename_template="__GRID_NAME__.grid.nc"
+                  input_interval="initial_only" />
+
+<immutable_stream name="output"
+                  type="output"
+                  filename_template="__GRID_NAME__.static_chems.nc"
+                  packages="initial_conds"
+                  output_interval="initial_only" />
+
+<stream name="anth_bc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_black-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_anth_res"/>
+        <var name="bc_anth_sum"/>
+</stream>
+
+<stream name="anth_oc_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_organic-carbon.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_anth_res"/>
+        <var name="oc_anth_sum"/>
+</stream>
+
+<stream name="anth_nh3_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_ammonia.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_anth_agl"/>
+        <var name="nh3_anth_ags"/>
+        <var name="nh3_anth_awb"/>
+        <var name="nh3_anth_ene"/>
+        <var name="nh3_anth_fef"/>
+        <var name="nh3_anth_ind"/>
+        <var name="nh3_anth_res"/>
+        <var name="nh3_anth_shp"/>
+        <var name="nh3_anth_slv"/>
+        <var name="nh3_anth_sum"/>
+        <var name="nh3_anth_swd"/>
+        <var name="nh3_anth_tnr"/>
+        <var name="nh3_anth_tro"/>
+</stream>
+
+<stream name="anth_so2_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_sulfur-dioxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_anth_sum"/>
+</stream>
+
+<stream name="anth_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_anth_sum"/>
+</stream>
+
+<stream name="anth_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_anth_sum"/>
+</stream>
+
+<stream name="anth_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-anth_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_anth_sum"/>
+</stream>
+
+<stream name="biob_bc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="bc_biob_modis"/>
+</stream>
+
+<stream name="biob_oc_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="oc_biob_modis"/>
+</stream>
+
+<stream name="biob_ni_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="nh3_biob_modis"/>
+</stream>
+
+<stream name="biob_su_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="so2_biob_modis"/>
+</stream>
+
+<stream name="biob_co_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biob_modis"/>
+</stream>
+<stream name="biob_iso_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biob_modis"/>
+</stream>
+
+<stream name="biob_mnt_emissions"
+        type="input"
+        filename_template="FINNv2.5.1_modvrs_nrt_MOZART_2024___GRID_NAME__.static_hourly_netcdf3.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biob_modis"/>
+</stream>
+
+<stream name="biog_co_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_carbon-monoxide.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="co_biog_megan"/>
+</stream>
+
+<stream name="biog_iso_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_isoprene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="iso_biog_megan"/>
+</stream>
+
+<stream name="biog_mnt_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_other-monoterpenes.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnt_biog_megan"/>
+</stream>
+
+<stream name="biog_apinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_alpha-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mnta_biog_megan"/>
+</stream>
+
+<stream name="biog_bpinene_emissions"
+        type="input"
+        filename_template="__GRID_NAME__-2024-biog_beta-pinene.MPAS.nc"
+        input_interval="none">
+        immutable="false"
+
+        <var name="mntb_biog_megan"/>
+</stream>
+
+</streams>
+
+==== end of inventory ====
