@@ -119,6 +119,7 @@ run_model() {  # run_model <core> <ranks> <label>
 
 g2g_activate
 mkdir -p "$run"
+g2g_require_symlinks "$run"
 cd "$run"
 
 if want static || want init; then

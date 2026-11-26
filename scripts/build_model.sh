@@ -38,6 +38,7 @@ done
 
 g2g_activate
 mkdir -p "$G2G_LOGS"
+g2g_require_symlinks "$G2G_WORK"
 
 for core in "${cores[@]}"; do
     tree="$G2G_BUILD/$core/gocartMPAS"

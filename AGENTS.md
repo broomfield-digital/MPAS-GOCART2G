@@ -33,6 +33,11 @@ workstation: `scripts/`, `test_cases/`, and these agent files.
 - **Data stays out of git.** Inputs, builds, and run directories live under
   `$G2G_WORK` (default `$HOME/Data/MPAS-GOCART2G`). Check free disk space
   before long runs: one full-state history frame on the 120-km mesh is 0.66 GB.
+- **`G2G_WORK` needs a Linux filesystem.** Builds and run directories are made
+  of symbolic links, and the WPS intermediate files have a colon in their
+  names (`GFS:2024-10-15_00`); exFAT, FAT, and NTFS drives can hold neither.
+  Such a drive can still take the large Derecho emission and grid directories
+  through `G2G_BULK` (see `scripts/fetch_derecho_inputs.sh --help`).
 - **Report what was established.** "The run finished without errors" and "the
   aerosol fields are scientifically right" are different claims. The checker
   decides only the first; scientific judgment rests with the maintainers.

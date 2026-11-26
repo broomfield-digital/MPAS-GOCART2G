@@ -33,6 +33,16 @@ g2g_die() {
     exit 1
 }
 
+# Builds and run directories are made of symbolic links, which exFAT, FAT, and
+# NTFS drives cannot hold. Stop with an explanation instead of a failed "ln".
+g2g_require_symlinks() {  # g2g_require_symlinks <existing directory>
+    local probe="$1/.g2g_probe_link.$$"
+    if ! ln -s "$1" "$probe" 2>/dev/null; then
+        g2g_die "$1 is on a filesystem without symbolic links (exFAT, FAT, or NTFS?); keep G2G_WORK on a Linux filesystem"
+    fi
+    rm -f "$probe"
+}
+
 # Put the GNU/Open MPI/PnetCDF toolchain on PATH. The model is built against
 # SMIOL, so PIO must stay unset: with PIO set the Makefile drops the SMIOL link
 # line that the GOCART-2G optics reader needs.

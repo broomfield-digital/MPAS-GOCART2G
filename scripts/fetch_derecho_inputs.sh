@@ -16,6 +16,16 @@
 #   DERECHO_HOST   SSH host; "local" reads DERECHO_ROOT from this machine
 #                                                 [derecho.hpc.ucar.edu]
 #   DERECHO_ROOT   remote root directory          [/glade/campaign/acom/MUSICA/MPAS]
+#   G2G_BULK       optional second location, for example an external drive,
+#                  that receives the large emission and grid directories
+#
+# With G2G_BULK set, input/EMIS, input/Example-1/EMIS, and input/Example-1/GRID
+# are stored under $G2G_BULK/derecho/ and reached through symbolic links in
+# $G2G_WORK/inputs/derecho/, so there is still one tree to read from. The
+# drive may be exFAT. The other directories stay in G2G_WORK on purpose: the
+# GFS and MERRA-2 intermediate files have a colon in their names (GFS:2024-...),
+# which exFAT, FAT, and NTFS cannot store. The drive must be mounted whenever
+# the linked directories are read or updated.
 #
 # Sets that do not depend on the mesh, usable with the 120-km test cases:
 #   templates    reference namelist and stream templates, submission scripts
@@ -68,6 +78,9 @@ set_paths() {  # print the paths, relative to the root, that make up a set
 }
 ALL_SETS="templates background optics merra2 core gfs emis60 grid60 example1 emis-raw regrid60"
 
+# Directories that may live on G2G_BULK: large, and free of colon-named files.
+BULK_PATHS="input/EMIS input/Example-1/EMIS input/Example-1/GRID"
+
 dry_run=false
 sets=()
 for arg in "$@"; do
@@ -117,7 +130,9 @@ fi
 # -L copies what a symlink points to: the Example-1 directories may link into
 # other parts of /glade. Permissions are not preserved, so group-only files
 # from Campaign Storage stay readable here.
-opts=(--recursive --times --copy-links --relative --partial --human-readable --chmod=Du+rwx,Fu+rw)
+# --keep-dirlinks makes rsync write through the G2G_BULK links instead of
+# replacing them with directories.
+opts=(--recursive --times --copy-links --relative --keep-dirlinks --partial --human-readable --chmod=Du+rwx,Fu+rw)
 if $dry_run; then
     opts+=(--dry-run --verbose --stats)
 else
@@ -126,6 +141,42 @@ fi
 
 mkdir -p "$dest" "$G2G_LOGS"
 log="$G2G_LOGS/fetch_derecho_inputs.log"
+
+if [ -n "${G2G_BULK:-}" ]; then
+    [ -d "$G2G_BULK" ] && [ -w "$G2G_BULK" ] || g2g_die "G2G_BULK=$G2G_BULK is not a writable directory (is the drive mounted?)"
+fi
+for bp in $BULK_PATHS; do
+    covered=false
+    for p in "${paths[@]}"; do
+        case "$bp/" in "$p"*) covered=true ;; esac
+    done
+    $covered || continue
+    # A link whose drive is not mounted would be replaced by a real directory
+    # and the data would land on the wrong disk, so stop instead.
+    if [ -L "$dest/$bp" ] && [ ! -d "$dest/$bp" ]; then
+        g2g_die "$dest/$bp points to $(readlink "$dest/$bp"), which is not available; mount that drive first"
+    fi
+    if [ -n "${G2G_BULK:-}" ]; then
+        if [ -L "$dest/$bp" ]; then
+            echo "bulk: $bp -> $(readlink "$dest/$bp")"
+        elif [ -e "$dest/$bp" ]; then
+            echo "bulk: $bp already exists in $dest; leaving it there"
+        elif $dry_run; then
+            echo "bulk: $bp would be stored in $G2G_BULK/derecho/$bp"
+        else
+            mkdir -p "$G2G_BULK/derecho/$bp" "$(dirname "$dest/$bp")"
+            ln -s "$G2G_BULK/derecho/$bp" "$dest/$bp"
+            echo "bulk: $bp -> $G2G_BULK/derecho/$bp"
+        fi
+    fi
+done
+
+# Fail early, with a useful message, if the destination cannot hold the
+# colon-named intermediate files that some sets contain.
+if ! ( : > "$dest/.g2g_probe:$$" ) 2>/dev/null; then
+    g2g_die "$dest cannot store file names containing ':' (exFAT, FAT, or NTFS?). Keep G2G_WORK on a Linux filesystem and use G2G_BULK for the external drive"
+fi
+rm -f "$dest/.g2g_probe:$$"
 echo "from: $where"
 echo "to:   $dest"
 printf 'sets: %s\n' "${sets[*]}"
@@ -149,7 +200,7 @@ if ! $dry_run; then
     echo "copied into $dest:"
     for p in "${paths[@]}"; do
         if [ -e "$dest/$p" ]; then
-            printf '  %-8s %s\n' "$(du -sh "$dest/$p" | cut -f1)" "$p"
+            printf '  %-8s %s\n' "$(du -shL "$dest/$p" | cut -f1)" "$p"
         else
             printf '  %-8s %s\n' "MISSING" "$p"
         fi

@@ -59,8 +59,11 @@ scripts/fetch_derecho_inputs.sh --dry-run core    # names and total size only
 scripts/fetch_derecho_inputs.sh core              # templates, background, optics, MERRA-2
 ```
 
-Files land in `$G2G_WORK/inputs/derecho/` under the same relative paths. The
-`core` sets do not depend on the mesh. The `emis60` and `grid60` sets are on
+Files land in `$G2G_WORK/inputs/derecho/` under the same relative paths. If
+the internal disk is short of space, `G2G_BULK=/path/on/another/drive` sends
+the large emission and grid directories there and links them into that tree;
+the drive may be exFAT, and it must be mounted whenever those directories are
+used. The `core` sets do not depend on the mesh. The `emis60` and `grid60` sets are on
 the tutorial's 60-km mesh and cannot be used on another mesh; emissions for
 another mesh must be regridded with `UPTEMPO/` from the `emis-raw` set.
 
