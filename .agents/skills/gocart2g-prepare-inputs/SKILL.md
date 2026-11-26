@@ -38,9 +38,27 @@ writes one all-zero file per emission stream plus stream blocks for each core.
 Zero emissions are a software test input. Say so whenever results from such a
 run are reported.
 
-Real emissions come from `UPTEMPO/` (see its README files). That path needs
-CAMS downloads from ECCAD, FINN text files, an MPAS SCRIP file for the mesh,
-and ESMF regridding; none of it is automated here.
+Real emissions come from the tools in `UPTEMPO/` (see its README files),
+driven by one script:
+
+```bash
+scripts/fetch_derecho_inputs.sh emis-raw-2024   # raw CAMS and FINN; needs an NCAR login
+scripts/regrid_emissions.sh                     # anth + biog + fire onto x1.40962
+scripts/regrid_emissions.sh fire --fire-start 2024-11-01 --fire-end 2024-11-07
+```
+
+It writes the mesh's SCRIP file (`scripts/make_mpas_scrip.py`), the UPTEMPO
+YAML files, and the results under `$G2G_WORK/inputs/emis/<mesh>/` with the
+file names the reference stream files use. The first run creates a conda
+environment with ESMF at `$G2G_WORK/envs/uptempo`; the model's own
+environment has no ESMF. Generating the CAMS weights needs about 10 GB of
+memory. Do not edit the tools under `UPTEMPO/` to make a run work; change the
+generated configuration instead.
+
+Check a regridded file before trusting it: the global total of a `_sum`
+variable times `areaCell` from the static file should match the source
+inventory (the grid file's `areaCell` is on a unit sphere, so use the static
+or init file). Fire files must cover the whole run with a day to spare.
 
 ## Inputs kept on Derecho
 

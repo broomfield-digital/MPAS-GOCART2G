@@ -75,7 +75,9 @@ scripts/run_case.sh natural_120km   # static + init + 3-hour run + check
 
 With the Derecho inputs (`scripts/fetch_derecho_inputs.sh core`, which asks
 for an NCAR login), `scripts/run_case.sh merra2_120km` runs every aerosol
-component from a MERRA-2 start.
+component from a MERRA-2 start. Adding the raw inventories
+(`fetch_derecho_inputs.sh emis-raw-2024`) and `scripts/regrid_emissions.sh`
+gives `full_120km`, which also has real emissions.
 
 Every script is idempotent, stops on the first failure, and names the log to
 read. `scripts/run_case.sh --help` lists the stage and length options.
@@ -159,6 +161,13 @@ use the `f000` file; the `.anl` file lacks the surface and soil fields. It has
   `input_interval="none"`, and a file whose `xtime` records bracket the run.
   `scripts/make_zero_emissions.py` writes all-zero files and the stream blocks
   when real emissions are not available.
+- **Real emissions** come from `scripts/regrid_emissions.sh`, which runs the
+  `UPTEMPO/` tools unchanged in their own conda environment (ESMF is not in
+  the model toolchain). A case uses them by setting
+  `CASE_EMISSIONS=regridded` and writing the emission streams into its stream
+  templates, as `test_cases/full_120km` does. The reference namelist's
+  `config_epssm` is reported as no longer supported by this model version and
+  is left out of the cases here.
 - **The two cores register different emission variables.** The init core
   knows every CAMS sector; the atmosphere core only the sectors it uses. A
   stream block that names an unregistered variable aborts the stream parser.
@@ -179,8 +188,8 @@ use the `f000` file; the `.anl` file lacks the surface and soil fields. It has
 | Dust source tiles | WPS geog downloads | public, `fetch_inputs.sh` |
 | Optics tables | NOAA UFS regression-test bucket (the GEOS files) | public, `fetch_inputs.sh`: the Registry-default versions, without a brown-carbon band file. The versions the reference namelist names are on Derecho (`fetch_derecho_inputs.sh optics`) |
 | Meteorology | NOAA GFS on AWS, via WPS ungrib | public, `prepare_gfs.sh` |
-| Anthropogenic and biogenic emissions | CAMS-GLOB-ANT v6.2, CAMS-GLOB-BIO v3.1 through `UPTEMPO/` | raw files are on Derecho (`fetch_derecho_inputs.sh emis-raw-2024`) or need an ECCAD account; regridding needs ESMF and is not automated here |
-| Fire emissions | FINN v2.5.1 through `UPTEMPO/` | text files are public and on Derecho; regridding is not automated here |
+| Anthropogenic and biogenic emissions | CAMS-GLOB-ANT v6.2, CAMS-GLOB-BIO v3.1 through `UPTEMPO/` | raw files are on Derecho (`fetch_derecho_inputs.sh emis-raw-2024`) or need an ECCAD account; `regrid_emissions.sh` regrids them |
+| Fire emissions | FINN v2.5.1 through `UPTEMPO/` | text files are public and on Derecho; `regrid_emissions.sh fire` regrids them |
 | Background oxidants, DMS, tropopause | `BACKGROUND_*.dat` | only on Derecho; `fetch_derecho_inputs.sh background` |
 | Aerosol initial condition | MERRA-2 through `init_MPAS-GOCART2G/` | needs a NASA Earthdata login; the Example-1 files are on Derecho (`fetch_derecho_inputs.sh merra2`) |
 | Reference namelist and stream templates | `/glade/campaign/acom/MUSICA/MPAS/input/{namelist_files,stream_files}` | only on Derecho, not in this repository; `fetch_derecho_inputs.sh templates` |
@@ -230,6 +239,7 @@ seen in that case; read it before interpreting a run.
 |---|---|---|---|
 | `natural_120km` | `x1.40962`, 55 levels | dust and sea salt, cold start, zero other emissions | public only |
 | `merra2_120km` | `x1.40962`, 55 levels | all eight components from a MERRA-2 start, reference backgrounds and optics, zero inventory emissions | public plus `fetch_derecho_inputs.sh core` |
+| `full_120km` | `x1.40962`, 55 levels | as `merra2_120km`, with CAMS and FINN emissions regridded to the mesh; the analog of the tutorial's Example-1 | also `fetch_derecho_inputs.sh emis-raw-2024` and `regrid_emissions.sh` |
 
 To add a case, copy a case directory, edit `case.env` and the templates, and
 list it here. Keep the README honest about which inputs are synthetic.

@@ -13,15 +13,16 @@ Read `AGENTS.md` first, then the README of the case in `test_cases/<case>/`.
   (else use `gocart2g-build`). After a source change, rebuild first; the run
   directory links the build copy, not the repository.
 - Inputs exist (else use `gocart2g-prepare-inputs`).
-- Disk space: `df -h "$G2G_WORK"`. A 3-hour run of either case needs about
+- Disk space: `df -h "$G2G_WORK"`. A 3-hour run of any case needs about
   3 GB; each extra history frame adds 0.66 GB.
-- Memory: either case uses about 28 GB on 8 ranks.
+- Memory: every case uses about 28 GB on 8 ranks.
 
 ## Run
 
 ```bash
 scripts/run_case.sh natural_120km                    # static + init + atm + check
 scripts/run_case.sh merra2_120km                     # all components; needs the Derecho core set
+scripts/run_case.sh full_120km                       # plus regridded CAMS and FINN emissions
 scripts/run_case.sh natural_120km --hours 24 --name natural_24h
 scripts/run_case.sh natural_120km --stage atm        # reuse the init file
 scripts/run_case.sh natural_120km --stage init --fresh
@@ -72,6 +73,7 @@ README (purpose, inputs, what is synthetic, reference numbers with the commit
 that produced them), and add the case to the table in `AGENTS.md`. Template
 files must keep the `@MESH@`, `@START_TIME@`, `@RUN_DURATION@`,
 `@HISTORY_INTERVAL@`, `@GEOG_PATH@`, and `@EMISSION_STREAMS@` tokens where
-those values belong. `scripts/run_case.sh --help` lists the `case.env`
-settings that link the Derecho inputs. The checker takes its component list
+those values belong, unless the case writes its emission streams out in
+full as `full_120km` does. `scripts/run_case.sh --help` lists the `case.env`
+settings that link the Derecho inputs and the regridded emissions. The checker takes its component list
 from the `COMPONENTS` table in `scripts/check_run.py`.

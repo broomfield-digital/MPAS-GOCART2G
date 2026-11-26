@@ -35,6 +35,7 @@ except where the mesh requires otherwise, and except these:
 | Init flow | two passes from the downloaded static file | static interpolation from the grid file, then one chemistry pass |
 | `config_jedi_da` | not set (false) | true |
 | `config_print_detailed_minmax_vel` | false | true |
+| `config_epssm` | not set | 0.1; this model version reports the option as no longer supported |
 
 ## What is synthetic
 

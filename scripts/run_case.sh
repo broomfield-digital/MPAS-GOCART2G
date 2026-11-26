@@ -24,6 +24,10 @@
 #   CASE_BACKGROUND=yes   link BACKGROUND_{sulf,dms,ptrop}.dat for the init pass
 #   CASE_MERRA2=yes       link the MERRA-2 aerosol intermediate file for the start time
 #   CASE_OPTICS_DIR=...   directory under $G2G_WORK/inputs holding the optics tables
+# and, for cases with real emissions from scripts/regrid_emissions.sh:
+#   CASE_EMISSIONS=regridded   link $G2G_WORK/inputs/emis/<mesh>/*.nc; the case's
+#                              stream templates then define the emission streams
+#                              themselves (default: zero, generated per run)
 #
 # Two init passes are required. The emission flags make init_atmosphere read
 # erod from its input file, so the dust fields must already be in that file;
@@ -39,7 +43,7 @@ set -euo pipefail
 
 [ "$#" -ge 1 ] || g2g_die "usage: run_case.sh CASE [options]; see --help"
 case "$1" in
-    -h|--help) sed -n '2,35p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    -h|--help) sed -n '2,39p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; exit 0 ;;
 esac
 case_name="$1"; shift
 case_dir="$G2G_REPO/test_cases/$case_name"
@@ -73,6 +77,9 @@ cycle="$CASE_CYCLE"
 start_time="${cycle:0:4}-${cycle:4:2}-${cycle:6:2}_${cycle:8:2}:00:00"
 start_day="${cycle:0:4}-${cycle:4:2}-${cycle:6:2}"
 stop_day="$(date -u -d "$start_day ${cycle:8:2}:00:00 UTC + $hours hours" +%Y-%m-%d)"
+stop_stamp="$(date -u -d "$start_day ${cycle:8:2}:00:00 UTC + $hours hours" +%Y-%m-%d_%H)"
+emissions="${CASE_EMISSIONS:-zero}"
+case "$emissions" in zero|regridded) ;; *) g2g_die "CASE_EMISSIONS must be zero or regridded" ;; esac
 run_duration="$(printf '%d_%02d:00:00' $((hours / 24)) $((hours % 24)))"
 
 run="$G2G_RUNS/$run_name"
@@ -83,8 +90,26 @@ atm_tree="$G2G_BUILD/atmosphere/gocartMPAS"
 chem_src="$G2G_REPO/gocartMPAS/src/core_atmosphere/chemistry"
 derecho="$G2G_INPUTS/derecho"
 optics_dir="$G2G_INPUTS/${CASE_OPTICS_DIR:-optics/raw}"
+emis_dir="$G2G_INPUTS/emis/$mesh"
 
 want() { case "$stage" in all|"$1") return 0 ;; *) return 1 ;; esac; }
+
+# First and last time stamp (YYYY-MM-DD_HH) in an emission file.
+xtime_range() {
+    ncdump -v xtime "$1" | grep -o '"[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_[0-9]\{2\}' | tr -d '"' | sed -n '1p;$p' | tr '\n' ' '
+}
+
+# The model interpolates between the emission records before and after the
+# model time, so every emission file must start by the run's start and end
+# after its stop.
+check_emission_coverage() {
+    local f first last
+    for f in "$@"; do
+        read -r first last <<< "$(xtime_range "$f")"
+        [[ ! "$first" > "${start_time:0:13}" && "$last" > "$stop_stamp" ]] \
+            || g2g_die "$f covers $first to $last, not the run (${start_time:0:13} to $stop_stamp)"
+    done
+}
 
 need_file() { [ -e "$1" ] || g2g_die "missing $1 ($2)"; }
 
@@ -173,13 +198,19 @@ if want init; then
             ln -sf "$merra2" .
         fi
         rm -f "$mesh.init.nc" "$mesh".zero.*.nc
-        python "$G2G_REPO/scripts/make_zero_emissions.py" \
-            --chemistry-dir "$chem_src" --mesh "$mesh.static_chems.nc" --grid-name "$mesh" \
-            --start "$start_day" --stop "$stop_day" --outdir "$run" \
-            --streams-atmosphere-out streams.emissions.atmosphere \
-            --streams-init-out streams.emissions.init_atmosphere
         render "$case_dir/namelist.init_atmosphere.init" namelist.init_atmosphere
-        render "$case_dir/streams.init_atmosphere.init" streams.init_atmosphere streams.emissions.init_atmosphere
+        if [ "$emissions" = regridded ]; then
+            ls "$emis_dir"/*.nc >/dev/null 2>&1 || g2g_die "no emission files in $emis_dir (run scripts/regrid_emissions.sh)"
+            ln -sf "$emis_dir"/*.nc .
+            render "$case_dir/streams.init_atmosphere.init" streams.init_atmosphere
+        else
+            python "$G2G_REPO/scripts/make_zero_emissions.py" \
+                --chemistry-dir "$chem_src" --mesh "$mesh.static_chems.nc" --grid-name "$mesh" \
+                --start "$start_day" --stop "$stop_day" --outdir "$run" \
+                --streams-atmosphere-out streams.emissions.atmosphere \
+                --streams-init-out streams.emissions.init_atmosphere
+            render "$case_dir/streams.init_atmosphere.init" streams.init_atmosphere streams.emissions.init_atmosphere
+        fi
         run_model init_atmosphere 1 init
         [ -s "$mesh.init.nc" ] || g2g_die "init stage wrote no $mesh.init.nc"
     fi
@@ -188,12 +219,23 @@ fi
 if want atm; then
     need_file "$atm_tree/atmosphere_model" "run scripts/build_model.sh atmosphere"
     need_file "$mesh.init.nc" "run the init stage first"
-    need_file streams.emissions.atmosphere "run the init stage first"
     need_file "$mesh_dir/$mesh.graph.info.part.$ranks" "no partition file for $ranks ranks"
-    # The emission files written by the init stage must still bracket this run.
-    last_record="$(ncdump -v xtime "$mesh.zero.anth_bc_emissions.nc" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}_' | tail -1)"
-    [[ "${last_record%_}" > "$stop_day" ]] \
-        || g2g_die "emission files end at ${last_record%_}, before the run stops ($stop_day); rerun with --stage init --fresh"
+    if [ "$emissions" = regridded ]; then
+        ln -sf "$emis_dir"/*.nc .
+        render "$case_dir/streams.atmosphere" streams.atmosphere
+        # Every emission file a stream names must be present and cover the run.
+        emission_files=()
+        while IFS= read -r f; do
+            need_file "$f" "run scripts/regrid_emissions.sh"
+            emission_files+=("$f")
+        done < <(grep -B3 'input_interval="none"' streams.atmosphere | grep -o 'filename_template="[^"]*"' | cut -d'"' -f2 | grep -v sfc_update | sort -u)
+        [ "${#emission_files[@]}" -gt 0 ] || g2g_die "$case_dir/streams.atmosphere defines no emission streams"
+        check_emission_coverage "${emission_files[@]}"
+    else
+        need_file streams.emissions.atmosphere "run the init stage first"
+        check_emission_coverage "$mesh.zero.anth_bc_emissions.nc"
+        render "$case_dir/streams.atmosphere" streams.atmosphere streams.emissions.atmosphere
+    fi
 
     ln -sf "$atm_tree/atmosphere_model" .
     ln -sf "$mesh_dir/$mesh.graph.info.part.$ranks" .
@@ -211,12 +253,12 @@ if want atm; then
     cp "$atm_tree"/stream_list.atmosphere.* .
     cp "$case_dir"/stream_list.atmosphere.* .
     render "$case_dir/namelist.atmosphere" namelist.atmosphere
-    render "$case_dir/streams.atmosphere" streams.atmosphere streams.emissions.atmosphere
     rm -f history.*.nc diag.*.nc aerosol.*.nc
     run_model atmosphere "$ranks" atmosphere
     cat > run_info.txt <<EOF
 case=$case_name
 mesh=$mesh
+emissions=$emissions
 start_time=$start_time
 hours=$hours
 ranks=$ranks
