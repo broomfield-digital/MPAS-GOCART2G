@@ -38,6 +38,9 @@ workstation: `scripts/`, `test_cases/`, and these agent files.
   names (`GFS:2024-10-15_00`); exFAT, FAT, and NTFS drives can hold neither.
   Such a drive can still take the large Derecho emission and grid directories
   through `G2G_BULK` (see `scripts/fetch_derecho_inputs.sh --help`).
+- **No post-processing or plotting code here.** Analysis and figures are kept
+  in a separate repository. This one stops at `scripts/check_run.py`, which
+  decides only whether a run finished and its fields are sane.
 - **Report what was established.** "The run finished without errors" and "the
   aerosol fields are scientifically right" are different claims. The checker
   decides only the first; scientific judgment rests with the maintainers.
