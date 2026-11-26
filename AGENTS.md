@@ -172,13 +172,20 @@ use the `f000` file; the `.anl` file lacks the surface and soil fields. It has
 | Meteorology | NOAA GFS on AWS, via WPS ungrib | public, `prepare_gfs.sh` |
 | Anthropogenic and biogenic emissions | CAMS-GLOB-ANT v6.2, CAMS-GLOB-BIO v3.1 through `UPTEMPO/` | needs an ECCAD account and ESMF; not automated here |
 | Fire emissions | FINN v2.5.1 through `UPTEMPO/` | text files are public; not automated here |
-| Background oxidants, DMS, tropopause | `BACKGROUND_*.dat` | only on Derecho |
-| Aerosol initial condition | MERRA-2 through `init_MPAS-GOCART2G/` | needs a NASA Earthdata login |
-| Reference namelist and stream templates | `/glade/campaign/acom/MUSICA/MPAS/input/{namelist_files,stream_files}` | only on Derecho; not in this repository |
+| Background oxidants, DMS, tropopause | `BACKGROUND_*.dat` | only on Derecho; `fetch_derecho_inputs.sh background` |
+| Aerosol initial condition | MERRA-2 through `init_MPAS-GOCART2G/` | needs a NASA Earthdata login; the Example-1 files are on Derecho (`fetch_derecho_inputs.sh merra2`) |
+| Reference namelist and stream templates | `/glade/campaign/acom/MUSICA/MPAS/input/{namelist_files,stream_files}` | only on Derecho, not in this repository; `fetch_derecho_inputs.sh templates` |
 
 The Derecho example (`docs/tutorial.md`, `util/submit_mpas_gocart.bash`) uses
 the 60-km mesh `x1.163842` with every input above. The workstation case uses
 only the public rows.
+
+`scripts/fetch_derecho_inputs.sh` pulls the Derecho rows over SSH into
+`$G2G_WORK/inputs/derecho/`. It prompts for an NCAR password and Duo approval,
+so the maintainer has to run it. `scripts/derecho_inventory.sh` runs on
+Derecho itself and lists what the input directories really contain; the
+download script's paths come from this repository's documentation and have
+not been checked against such a listing.
 
 ## Test cases
 

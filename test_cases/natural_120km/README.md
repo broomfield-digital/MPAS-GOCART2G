@@ -72,6 +72,8 @@ single-precision reals, 8 ranks, 16-core workstation, 2026-11-26.
 | init pass | 15 s |
 | atmosphere, 3 simulated hours | 212 s |
 
+Memory: about 3.5 GB per rank, 28 GB in total on 8 ranks.
+
 State at 2024-10-15 03 UTC:
 
 | Quantity | Dust | Sea salt |
